@@ -1,6 +1,7 @@
 let provider;
 const API_BASE_URL = "https://api.piratepets.io/api/v1/";
-const showAlert = (errotType, errorMsg) =>{ Swal.fire({ icon: errotType, title: errorMsg, position: 'center-center', showConfirmButton: false, timer: 1500, showClass: { popup: 'animate__animated animate__fadeInDown' }, hideClass: { popup: 'animate__animated animate__fadeOutUp'} }) }
+// const API_BASE_URL = "https://api-dev.piratepets.io/api/v1/";
+const showAlert = (errotType, errorMsg) =>{ Swal.fire({ icon: errotType, title: errorMsg, position: 'center', showConfirmButton: false, timer: 1500, showClass: { popup: 'animate__animated animate__fadeInDown' }, hideClass: { popup: 'animate__animated animate__fadeOutUp'} }) }
 const currentChainId = async () => { return await provider.request({ method: "eth_chainId" }) }
 const ethHexValue = (value) => { return ethers.utils.hexValue(parseInt(value)) }
 const copyToolout = () => { document.getElementById("myTooltip").innerHTML = "Copy to clipboard"; }
@@ -12,12 +13,46 @@ const copyToolText = () => {
     navigator.clipboard.writeText(walletAddress);
 }
 
-const callHttpRequest = async (appUrl, params, method, token) => {
+const ajaxCall = async (appUrl, params, method, token) => {
     return await $.ajax({ url: appUrl, type: method, data: params, dataType: "json", async: true, headers: { 'Authorization': token }, error: async (error) => { console.log(error); } });
 }
 
-const callHttpRequestImg = async (appUrl, params, method, token) => {
+const callHttpRequest = async (appUrl, params, method, token) => {
+    let reponse = await ajaxCall(appUrl, params, method, token);
+    if(typeof reponse.isInvalidToken == "undefined"){
+        return reponse;
+    }
+    else{
+        showAlert("info", "Session Timeout, Please Login.");
+        setTimeout(function () {
+            $(".login_btn").removeClass("d-none");
+            $(".wallet_connect").addClass("d-none");
+            $(".user_profile_dd").addClass('d-none');
+            deleteCookie('minigameWalletAddress'), deleteCookie('minigameWalletBalance'), deleteCookie('userLogin'), deleteCookie('userInfo'), location.replace(APP_URL);
+            location.replace(APP_URL + '/login');
+        }, 2000);
+    }
+}
+
+const ajaxCallImg = async (appUrl, params, method, token) => {
     return await $.ajax({ url: appUrl, processData: false, mimeType: "multipart/form-data", contentType: false, type: method, data: params, dataType: "json", async: true, headers: { 'Authorization': token }, error: async (error) => { console.log(error); } });
+}
+
+const callHttpRequestImg = async (appUrl, params, method, token) => {
+    let reponse = await ajaxCallImg(appUrl, params, method, token);
+    if(typeof reponse.isInvalidToken == "undefined"){
+        return reponse;
+    }
+    else{
+        showAlert("info", "Session Timeout, Please Login.");
+        setTimeout(function () {
+            $(".login_btn").removeClass("d-none");
+            $(".wallet_connect").addClass("d-none");
+            $(".user_profile_dd").addClass('d-none');
+            deleteCookie('minigameWalletAddress'), deleteCookie('minigameWalletBalance'), deleteCookie('userLogin'), deleteCookie('userInfo'), location.replace(APP_URL);
+            location.replace(APP_URL + '/login');
+        }, 2000);
+    }
 }
 
 const switchNetwork = async () => {
@@ -144,23 +179,29 @@ $(document).on("click", "#connect", async function () {
                 showAlert("error", response.message);
             }
             else {
-                let appUrl = `${API_BASE_URL}setting/view`;
-                let response = await callHttpRequest(appUrl, [], "GET", "");
-                let networkMode = response.data.blockchainNetworkMode;
-                let networkUrls = response.data.blockchain[0].networkUrl;
-                let filteredUrl = $.grep(networkUrls, function(network) { return network.type == networkMode });
-                const web3 = new Web3(new Web3.providers.HttpProvider(filteredUrl[0].url));
-                var balance = await web3.eth.getBalance(account);
                 $('.wallet_address').html(`${account.slice(0, 8)}...${account.slice(33)}`);
                 $(".wallet_connect").addClass("d-none");
                 $(".wallet_address_wrap").removeClass("d-none");
                 setCookie("minigameWalletAddress", account, 365);
-                setCookie("minigameWalletBalance", balance, 365);
+                checkBalance(account);
             }
         }
     }
 });
-
+checkBalance = async (account) => {
+    if(typeof account != "undefined"){
+        let appUrl = `${API_BASE_URL}setting/view`;
+        let response = await callHttpRequest(appUrl, [], "GET", "");
+        let networkMode = response.data.blockchainNetworkMode;
+        let networkUrls = response.data.blockchain[0].networkUrl;
+        let filteredUrl = $.grep(networkUrls, function(network) { return network.type == networkMode });
+        const web3 = new Web3(new Web3.providers.HttpProvider(filteredUrl[0].url));
+        var balance = parseFloat(web3.utils.fromWei( await web3.eth.getBalance(account) )).toFixed(4);
+        // console.log(balance);
+        $('.comon-token span.theme-text').html(`${balance}`);
+        setCookie("minigameWalletBalance", balance, 365);
+    }
+}
 $(document).on('submit', '#loginForm', async function (event) {
     event.preventDefault();
     let data = $(this).serialize();
@@ -301,7 +342,7 @@ $(document).on("click", "[data-action='remove-img']", async function (event) {
     let response = await callHttpRequest(appUrl, data, "POST", userAuth);
     if (response.status === 'success') {
         showAlert("success", response.message);
-        setTimeout(function () { location.replace(APP_URL + 'profile.php'); }, 2000);
+        setTimeout(function () { location.replace(APP_URL + '/profile'); }, 2000);
     }
     else {
         let message = response.message.replace("_", " ").toLocaleLowerCase().charAt(0).toUpperCase() + response.message.replace("_", " ").toLocaleLowerCase().slice(1);
@@ -419,7 +460,7 @@ $(document).on('submit','#change-password', async function(e){
         let response = await callHttpRequest(appUrl, params, "POST", "");
         if(response.status === 'success') {
             showAlert("success", response.message);
-            setTimeout(function () { location.replace(APP_URL + 'profile.php'); }, 2000);
+            setTimeout(function () { location.replace(APP_URL + '/profile'); }, 2000);
         } else {
             let message = response.message.replace("_", " ").toLocaleLowerCase().charAt(0).toUpperCase() + response.message.replace("_", " ").toLocaleLowerCase().slice(1);
             showAlert("error", message);
@@ -427,13 +468,34 @@ $(document).on('submit','#change-password', async function(e){
     }
 });
 
+const timerIncrement = () => {
+    idleTimerCheck = 59,idleTimer++;
+    if(idleTimer > idleTimerCheck){
+        Swal.fire({ title: "In-Activity!", text: "Session Timeout.", icon: 'info', confirmButtonText: 'Ok', allowOutsideClick: false })
+        .then((result) => {
+            if (result.isConfirmed) {
+                $(".login_btn").removeClass("d-none"),$(".user_profile_dd, .wallet_connect").addClass("d-none");
+                deleteCookie('minigameWalletAddress'), deleteCookie('minigameWalletBalance'), deleteCookie('userLogin'), deleteCookie('userInfo'), location.replace(APP_URL);
+                location.replace(APP_URL + '/login');
+            }
+        })
+    }
+}
+
+let idleTimer = 0;
 $(document).ready(async function () {
     await switchNetwork();
     let userAuth = getCookie("userLogin");
     let walletAddress = getCookie("minigameWalletAddress");
+    await checkBalance(walletAddress);
     let walletBalance = getCookie("minigameWalletBalance");
+    // console.log(walletBalance);
     let data = $(this).serialize();
     if(userAuth && userAuth !== null){
+        setInterval(timerIncrement, 60000);
+        $(this).mousemove(function (e) { idleTimer = 0; });
+        $(this).keypress(function (e) { idleTimer = 0; });
+
         $("#login_btn").addClass("d-none");
         let appUrl = `${API_BASE_URL}user/profile`;
         let response = await callHttpRequest(appUrl, data, "GET", userAuth);

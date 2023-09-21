@@ -5,7 +5,7 @@
 	<section class="react-reveal d-none SendRecive_main position-relative common_padding_main">
 		<div class="container">
 			<div class="sendrecieve_main position-relative">
-				<a href="javascript:void(0);" onclick="goBack()" class="wallet_back">
+				<a href="<?=APP_URL?>" class="wallet_back">
 					<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 28 28" fill="none">
 						<g filter="url(#filter0_di_1_7208)">
 							<path d="M14 23C7.92339 23 3 18.0766 3 12C3 5.92339 7.92339 1 14 1C20.0766 1 25 5.92339 25 12C25 18.0766 20.0766 23 14 23ZM8.94798 12.754L14.9581 18.7641C15.375 19.181 16.0492 19.181 16.4617 18.7641L17.2157 18.0101C17.6327 17.5931 17.6327 16.919 17.2157 16.5065L12.7093 12L17.2157 7.49355C17.6327 7.07661 17.6327 6.40242 17.2157 5.98992L16.4617 5.23589C16.0448 4.81895 15.3706 4.81895 14.9581 5.23589L8.94798 11.246C8.53105 11.6629 8.53105 12.3371 8.94798 12.754Z" fill="url(#paint0_linear_1_7208)"></path>
@@ -36,9 +36,9 @@
 					Back
 				</a>
 				<div class="cryto_name_top position-relative">
-					<div class="chain_name">BNB</div>
-					<div class="cryto_name text-center">
-						<p><span class="wallet_balnce_onmobile">0 </span>BNB</p>
+					<div class="cryto_name d-flex justify-content-center">
+						<img src="<?=@APP_URL?>/assets/images/bnb_icon.png" alt="BNB" class="img-fluid" style="width: 33px;height: 29px;object-fit: contain;">
+						<p> BNB <span class="theme-text" style="color: #6afff9;"><?=@$_COOKIE['minigameWalletBalance']?></span></p>
 					</div>
 					<div class="copy_Code">
 						<div class="code_here position-relative">
@@ -105,7 +105,7 @@
 			let walletAddress = getCookie("minigameWalletAddress");
 			if(typeof walletAddress == "undefinded" || walletAddress == "" || walletAddress == null){
 				$(".SendRecive_main").empty();
-				showAlert("info", "Please connect wallet to continue");
+				showAlert("info", "Connect Metamask First!");
 				setTimeout(function () {  window.history.back() }, 2000);
 			}
 			else{
