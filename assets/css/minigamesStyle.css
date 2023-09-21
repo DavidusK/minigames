@@ -1,0 +1,112 @@
+html {
+    height:100%;
+}
+
+body, html {
+    background: #161f44 !important;
+    height: 100%;
+}
+
+#unity-canvas-container {
+  position: relative;
+  width: 100%;
+  max-width: 1178px;
+  height: auto;
+  max-height: 663px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 85px;
+}
+
+#unity-loading-video, #unity-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* occupy full width of the container by default */
+  height: 100%; /* occupy full height of the container by default */
+  max-width: 1178px;
+  max-height: 663px;
+  border-radius: 18px;
+  outline: none;
+  z-index: 1;
+  /*background: linear-gradient(0deg, #000, #272727);*/
+}
+
+
+
+#unity-canvas {
+  /*background: #231f20;*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%; /* set to 100% of its container */
+  height: auto; /* auto height */
+  display: block; /* to remove any margins */
+  max-width: 1178px; /* as defined */
+  max-height: 663px; /* as defined */
+  border-radius: 18px;
+  outline: none;
+  position: relative;
+  z-index: 1;
+}
+
+
+
+.text-center {
+    display: flex;
+    justify-content: center;
+}
+
+.custom_container {
+    height: auto;
+}
+
+.header-main {
+    height:75px;
+}
+
+.navbar-brand img {
+    width: 160px;
+}
+
+section.login-theme {
+    padding: 0;
+    background: #161f44;
+}
+
+/*#unity-canvas {*/
+/*    margin-top: 85px;*/
+/*}*/
+
+@media only screen and (max-width: 767px){
+.custom_container {
+    height: 75px;
+}}
+
+@media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: none !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: none !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .container, .container-lg, .container-md, .container-sm {
+        max-width: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .container, .container-md, .container-sm {
+        max-width: none !important;
+    }
+}
+
+@media (min-width: 576px){
+.container, .container-sm {
+   max-width: none !important;
+}}

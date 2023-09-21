@@ -1,0 +1,2184 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
+
+body,
+html {
+    font-family: "Nunito", sans-serif !important;
+    background: linear-gradient(108.5deg, #242424 -5.86%, #161f44 100.57%) ;
+    overflow-x: hidden;
+    user-select: none;
+    height: 100%;
+}
+
+body::-webkit-scrollbar {
+    width: 0px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+:root {
+    --theme-btn: #ceff45;
+    --body-bg: #000000;
+    --theme-color: #ceff45;
+    --theme-textcolor: #82e6dd;
+    --theme-btndisabled: linear-gradient(180deg,
+            #516d7d 0%,
+            rgba(12, 34, 66, 0.63) 99.99%,
+            rgba(49, 66, 91, 0) 100%);
+    --theme_btnone: linear-gradient(180deg,
+            #57517d 0%,
+            rgba(12, 34, 66, 0.63) 99.99%,
+            rgba(49, 66, 91, 0) 100%);
+}
+
+button:active,
+button:focus {
+    background: var(--theme-btn);
+    box-shadow: unset !important;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+.mainpage-wrap {
+    height: 100%;
+    min-height: 100vh;
+}
+
+.overlay_col {
+    /*background: linear-gradient(108.5deg, #242424 -5.86%, #161f44 100.57%);*/
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0%;
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* cookies */
+.cookie-consent-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+}
+
+.cookie-consent-popup div {
+    margin: 10px 0;
+    text-align: left;
+}
+
+.cookie-consent-popup label {
+    color: #fff;
+}
+
+#save-cookie-preferences {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+/*cookies*/
+
+section.login-theme {
+    background-image: url(../images/logooctopus.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /*background-size: 88%;*/
+    background-position: 50% 5px;
+    height: 100%;
+    /*min-height: 100vh;*/
+    width: 100%;
+    padding: 120px 0 20px;
+}
+
+.verify-otp-send {
+    cursor: pointer !important;
+}
+
+h5.log-head {
+    text-align: center;
+    letter-spacing: 0.075em;
+    text-transform: capitalize;
+    color: #eeeeee;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 159.5%;
+    margin: 0;
+}
+
+section.login-theme a.wallet_back {
+    left: 30px;
+}
+
+a.wallet_back,
+a.wallet_back:hover {
+    color: #4ab05a;
+    text-decoration: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    position: absolute;
+    left: 0;
+}
+
+.login_inner {
+    background: linear-gradient(180deg, rgba(77, 209, 185, 0.17) 0%, #192c32 100%);
+    /* background: linear-gradient( 180deg, rgba(77, 209, 185, 0.17) 0%, #46c7a86b 40%, #192c32 100% ); */
+    border: 1px solid #46c7a8;
+    box-shadow: 0px 4px 5px rgb(15 18 32 / 72%), inset 0px 7px 9px #286f78;
+    border-radius: 12px;
+    padding: 50px 65px;
+    width: 36%;
+    margin: 32px auto 0;
+}
+
+.remember_recovery {
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember_recovery .form-check label {
+    color: #1ce8d6;
+    cursor: pointer;
+    font-family: Nunito;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: .055em;
+    line-height: 159.5%;
+    margin: 0;
+}
+
+.remember_recovery input.form-check-input {
+    border: 0.704378px solid #46c7a8!important;
+    outline: none;
+}
+
+.form-check-input:focus {
+    box-shadow: none !important;
+}
+
+a.recovery_col {
+    border-bottom: 1px solid;
+    color: #82e6dd;
+    color: var(--theme-textcolor);
+    font-family: Nunito;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: .055em;
+    line-height: 159.5%;
+    padding-bottom: 2px;
+    text-decoration: none;
+}
+
+a.recovery_col:hover, .remember_recovery .form-check label:hover {
+    color: #fff;
+}
+
+form.form_login input:not(.remember_recovery input.form-check-input),
+form.form_login input:not(.remember_recovery input.form-check-input):focus {
+    background: linear-gradient(180deg, rgba(118, 242, 220, 0.45) 0%, rgba(196, 196, 196, 0) 100%);
+    border: 0.704378px solid #46c7a8;
+    box-shadow: inset 0px 7px 9px #286f78;
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: #fff;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    color: #fff;
+}
+
+form.form_login input::placeholder {
+    color: var(--theme-textcolor);
+    letter-spacing: 0.075em;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 159.5%;
+}
+
+button.btn-form {
+    box-shadow: inset 0px 4px 9px rgb(255 255 255 / 12%);
+    filter: drop-shadow(0px 3px 5px rgba(5, 18, 18, 0.66));
+    border-radius: 10px;
+    background: var(--theme_btnone);
+    width: 190px;
+    padding: 9px;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+}
+
+.term_conditions p,
+.term_conditions p a {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 159.5%;
+    text-align: center;
+    letter-spacing: 0.055em;
+    color: var(--theme-textcolor);
+    padding: 10px 13px;
+    margin: 0;
+}
+
+.term_conditions p,
+.term_conditions p a {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 159.5%;
+    text-align: center;
+    letter-spacing: 0.055em;
+    color: var(--theme-textcolor);
+    padding: 10px 13px;
+    margin: 0;
+}
+
+.term_conditions p a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0;
+    border-bottom: 1px solid var(--theme-textcolor);
+    padding-bottom: 4px;
+}
+
+.have_account p {
+    font-family: "Arial";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 159.5%;
+    text-align: center;
+    letter-spacing: 0.055em;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.create_account {
+    border: 1px solid #87fff5;
+    border-radius: 10px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 159.5%;
+    width: 190px;
+    height: 49px;
+    padding: 9px;
+    background: transparent;
+    color: var(--theme-textcolor);
+}
+
+section.header-main {
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    /* position: absolute; */
+    position: fixed;
+    padding: 0px 0;
+    transition: 0.3s ease-in-out;
+    background: linear-gradient(rgba(66, 164, 152, 0.9), rgba(29, 34, 55, 0.3));
+    background-color: transparent;
+    transition: 0.3s ease-in-out;
+}
+
+.custom_container {
+    margin: 0 80px;
+    height: 110px;
+    display: flex;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+nav.navbar.navbar-expand-lg {
+    width: 100%;
+    padding: 0;
+}
+
+a.navbar-brand {
+    max-width: 207px;
+    text-align: left;
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+    color: #fff;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 0;
+}
+
+ul.navbar-nav li a::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: #04fda3;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+.marketplaceLink a {
+    padding-bottom: 5px !important;
+}
+
+.marketplaceLink a:hover {
+    border-bottom: 1px solid #04FDA3;
+   
+}
+
+.wallet-section {
+    display: flex;
+    align-items: center;
+}
+
+.cryptotoken_wrap {
+    display: flex;
+    gap: 10px;
+}
+
+ul.connect_navbar-nav {
+    width: max-content;
+}
+
+ul.connect_navbar-nav {
+    padding: 0;
+    margin: 0;
+}
+
+.connect_navbar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ul.connect_navbar-nav li {
+    list-style-type: none;
+    margin: 0 5px;
+}
+
+ul.navbar-nav li a,
+ul.connect_navbar-nav a {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 30px;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    padding: 0px;
+    text-decoration: none;
+}
+
+ul.navbar-nav li {
+    position: relative;
+    margin: 0 12px;
+    list-style-type: none;
+}
+
+
+
+.create_account:hover,
+.create_account:focus,
+.create_account:active {
+    background: var(--theme_btnone);
+    box-shadow: inset 0px 4px 9px rgb(255 255 255 / 12%);
+    filter: drop-shadow(0px 3px 5px rgba(5, 18, 18, 0.66));
+}
+
+.btn-secondary:focus, .btn-secondary.focus {
+    box-shadow: none !important;
+}
+
+.login-alert {
+    margin-top: 1% !important;
+    width: 35.5%;
+    left: 32%;
+    color: #ff0000 !important;
+}
+
+button.close-menu {
+    display: none;
+}
+
+.connet_wallet {
+    background: linear-gradient(150deg, rgba(49, 98, 104, 1), rgba(4, 253, 163, 1));
+    /* background: linear-gradient( 180deg, rgba(95, 255, 216, 0.336) 0%, rgba(156, 79, 255, 0.36) 100% ); */
+    /* border: 0.5px solid #8be6f0; */
+    box-shadow: inset 0px 7px 9px rgb(40 111 120 / 50%);
+     filter: drop-shadow(0px 4px 4px rgba(18, 20, 27, 0.41));
+    border-radius: 8px;
+    padding: 5px 8px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #04fda3;
+    justify-content: center;
+    border-radius: 5px;
+    width: 110px;
+    height: 44px;
+    font-size: 14px;
+}
+
+.connet_wallet:hover {
+    color: #fff;
+    background: linear-gradient(150deg, rgba(4, 253, 163, 1), rgba(49, 98, 104, 1));
+}
+
+.desktop_user {
+    display: flex;
+}
+
+.wallet-section .dropdown .dropdown-menu {
+    background: linear-gradient(180deg, #223649 4.48%, #384581 100%);
+    mix-blend-mode: normal;
+    box-shadow: 0px 4px 3px rgba(18, 21, 36, 0.17);
+    backdrop-filter: blur(2px);
+    border-radius: 0px 0px 16px 16px;
+    min-width: 210px;
+    /* transform: translate(0px, 56px) !important; */
+}
+
+/* .wallet-section .dropdown .dropdown-menu {
+    right: 0 !important;
+    left: unset !important;
+  } */
+.wallet-section .dropdown .dropdown-menu button a {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    text-decoration: none;
+    color: #8DBDF1;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 26px;
+    position: relative;
+    cursor: pointer !important;
+}
+
+.wallet-section .dropdown .dropdown-menu button a:hover {
+    color: #fff;
+}
+
+
+.wallet-section .dropdown button.wallet_adress {
+    border: 0.5px solid #8be6f0 !important;
+    box-shadow: inset 0px 7px 9px rgb(40 111 120 / 50%);
+    border-radius: 8px;
+    width: max-content;
+    height: 44px;
+    padding: 0 35px 0px 10px !important;
+    font-size: 16px;
+    background: transparent;
+}
+
+.arrow-down {
+    position: absolute;
+    right: 13px;
+    bottom: 9px;
+    transform: rotate(90deg);
+}
+
+.comon-token {
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    border: 0.5px solid #8be6f0;
+    filter: drop-shadow(0px 2px 4px #15383c);
+    border-radius: 8px;
+    width: max-content;
+    gap: 6px;
+    margin-right: 5px;
+}
+
+.comon-token img {
+    width: 33px;
+    height: 29px;
+    object-fit: contain;
+}
+
+.comon-token p {
+    display: flex;
+    margin: 0;
+    gap: 7px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 26px;
+    color: #fff;
+}
+
+.user_profile_img {
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+}
+
+.comon-token p span {
+    color: #6afff9;
+}
+
+.desktop_user .dropdown:first-child .dropdown-menu.show {
+    padding: 0 !important;
+}
+
+.desktop_user .dropdown:first-child .dropdown-menu.show button.btnbottom {
+    border-bottom: none !important;
+}
+
+.wallet-section .dropdown-item:focus,
+.wallet-section .dropdown-item:hover {
+    background-color: transparent !important;
+}
+
+.wallet-section .dropdown .dropdown-menu button a.inventory-link::before {
+    content: "";
+    height: 1px;
+    width: 15%;
+    background: #04fda3;
+    position: absolute;
+    top: 0;
+    display: none;
+}
+
+
+.wallet-section .dropdown button.btn_user {
+    background: linear-gradient(180deg, rgba(95, 255, 216, 0.336) 0%, rgba(156, 79, 255, 0.36) 100%);
+    border: 0.5px solid #8be6f0 !important;
+    box-shadow: inset 0px 7px 9px rgb(40 111 120 / 50%);
+    border-radius: 8px;
+    width: 53px;
+    height: 44px;
+    padding: 0;
+}
+
+.wallet-section .dropdown button.btn.btn-secondary img {
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+    cursor: pointer !important;
+}
+
+button.btncopy {
+    margin-bottom: 14px;
+    text-transform: capitalize;
+}
+
+button.btncopy a img {
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 100px !important;
+}
+
+button.btnbottom {
+    padding: 10px 20px;
+    border: 0.5px solid #475c87;
+    border-right-width: 0.5px;
+    border-right-style: solid;
+    border-right-color: rgb(71, 92, 135);
+    border-left-width: 0.5px;
+    border-left-style: solid;
+    border-left-color: rgb(71, 92, 135);
+    border-left: 0;
+    border-right: 0;
+}
+
+.span-inventory {
+    color: #fff !important;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.logout_bnt {
+    padding: 22px 10px 6px;
+    text-align: center;
+}
+
+button.logout_btn {
+    background: linear-gradient(180deg, #6900bc -11.36%, rgba(0, 164, 105, 0.67) 111.36%);
+    border:none;
+    box-shadow: 0px 2px 3px #293768, inset 0px 7px 9px rgb(40 111 120 / 50%);
+    filter: drop-shadow(0px 4px 4px rgba(18, 20, 27, 0.41));
+    border-radius: 8px;
+    padding: 5px 20px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 26px;
+    color: #60c6d5;
+    
+}
+
+button.logout_btn:hover {
+    background: linear-gradient(0deg, #6900bc -111.36%, rgba(0, 164, 105, 0.67) 151.36%);
+    }
+
+.arrow_inv {
+    position: absolute;
+    right: 13px;
+    top: 14px;
+}
+
+.wallet-section .dropdown button.btn.btn-secondary:not(.wallet_adress) {
+    background: linear-gradient(180deg, rgba(95, 255, 216, 0.336) 0%, rgba(156, 79, 255, 0.36) 100%);
+     filter: drop-shadow(0px 4px 4px rgba(18, 20, 27, 0.51));
+    border: 0.5px solid #8be6f0 !important;
+    box-shadow: inset 0px 7px 9px rgb(40 111 120 / 50%);
+    border-radius: 8px;
+    width: 53px;
+    height: 44px;
+    padding: 0;
+}
+
+.login-success {
+    margin-top: 1% !important;
+    width: 35.5%;
+    left: 32%;
+    color: #32914b !important;
+}
+
+.profile_main {
+    height: 100vh;
+}
+
+.common_padding_main {
+    /* padding: 220px 0 20px; */
+    padding: 170px 0 20px;
+}
+
+.profile_bio {
+    background: linear-gradient(180deg, #42a498 0%, rgba(29, 34, 55, 0) 100%);
+    width: 100%;
+    border: 1px solid #42a498;
+    border-radius: 30px;
+    padding: 30px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 94%;
+    margin: 0px auto;
+}
+
+.profile_user {
+    display: flex;
+    align-items: center;
+}
+
+.edit_btn {
+    width: 140px;
+}
+
+.copy_address {
+    background: linear-gradient(180deg, #57517d 0%, rgba(12, 34, 66, 0.63) 99.99%, rgba(49, 66, 91, 0) 100%);
+    box-shadow: inset 0px 4px 4px #8795e1, inset 0px 4px 9px rgb(255 255 255 / 12%);
+    filter: drop-shadow(0px 2px 3px rgba(5, 13, 56, 0.38));
+    border-radius: 8px;
+    border: none;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 159.5%;
+    text-align: center;
+    letter-spacing: 0.075em;
+    text-transform: capitalize;
+    width: 80%;
+    padding: 8px;
+    cursor: pointer !important;
+}
+
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    background: linear-gradient(180deg, #57517d 0%, rgba(12, 34, 66, 0.63) 99.99%, rgba(49, 66, 91, 0) 100%);
+    box-shadow: inset 0px 4px 4px #8795e1, inset 0px 4px 9px rgb(255 255 255 / 12%) !important;
+    filter: drop-shadow(0px 2px 3px rgba(5, 13, 56, 0.38));
+}
+
+.btn-primary:hover {
+    background: linear-gradient(0deg, #57517d 0%, rgba(12, 34, 66, 0.63) 99.99%, rgba(49, 66, 91, 0) 100%);
+}
+
+.user_img {
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+    margin-right: 30px;
+}
+
+.bio_content {
+    text-align: left;
+}
+
+.user_img img {
+    border-radius: 100px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bio_content h4,
+.bio_content h5 {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+    color: #fff;
+}
+
+.profile_edit_mod .modal-dialog {
+    max-width: 450px;
+}
+
+.buy_modal .modal-content {
+    background: linear-gradient(180deg, rgba(95, 166, 153, 0.88) 0%, rgba(12, 16, 46, 0.88) 89.58%);
+    border: 0.704378px solid #46c7a8;
+    box-shadow: inset 0px 7px 9px rgb(40 111 120 / 50%);
+    border-radius: 12px;
+}
+
+a.close-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+
+.uploding_img {
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    margin: 0px auto 0px;
+    text-align: center;
+}
+
+.uploding_img img {
+    height: 150px;
+    width: 150px;
+    border-radius: 100px;
+    object-fit: cover;
+    margin: 0px auto 10px;
+}
+
+.upload_wrapping {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.file_upload_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-right: -15px;
+}
+
+input.profile_pic {
+    top: 0px;
+    position: absolute;
+    left: 0;
+    height: 30px;
+    width: 97px;
+    border-radius: 100px;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+}
+
+form.form_login input:not(.remember_recovery input.form-check-input),
+form.form_login input:not(.remember_recovery input.form-check-input):focus {
+    background: linear-gradient(180deg, rgba(118, 242, 220, 0.45) 0%, rgba(196, 196, 196, 0) 100%);
+    border: 0.704378px solid #46c7a8;
+    box-shadow: inset 0px 7px 9px #286f78;
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: #fff;
+}
+
+.dropdown a {
+    text-decoration: none;
+}
+
+.tooltipa {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltipa .tooltiptext {
+    visibility: hidden;
+    min-width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltipa .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltipa:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+label.upload_btn,
+button.upload_btn {
+    background: linear-gradient(180deg, #57517d 0%, rgba(12, 34, 66, 0.63) 99.99%, rgba(49, 66, 91, 0) 100%);
+    box-shadow: inset 0px 4px 4px #8795e1, inset 0px 4px 9px rgb(255 255 255 / 12%);
+    filter: drop-shadow(0px 2px 3px rgba(5, 13, 56, 0.38));
+    border-radius: 8px;
+    border: none;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 159.5%;
+    text-align: center;
+    letter-spacing: 0.075em;
+    text-transform: capitalize;
+    width: 96px;
+    padding: 5px;
+    cursor: pointer !important;
+}
+
+p.text-msg {
+    margin: 0;
+}
+
+button.btn-form {
+    box-shadow: inset 0px 4px 9px rgb(255 255 255 / 12%);
+    filter: drop-shadow(0px 3px 5px rgba(5, 18, 18, 0.66));
+    border-radius: 10px;
+    background: var(--theme_btnone);
+    width: 190px;
+    padding: 9px;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+}
+
+.modal-backdrop.show,
+.offcanvas-backdrop.show {
+    opacity: 1 !important;
+    background: linear-gradient(108.5deg, rgba(36, 36, 36, 0.7) -5.86%, rgba(22, 31, 68, 0.7) 100.57%);
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    -moz-backdrop-filter: blur(15px) !important;
+    -webkit-background: linear-gradient(108.5deg, rgba(36, 36, 36, 0.7) -5.86%, rgba(22, 31, 68, 0.7) 100.57%);
+    -moz-background: linear-gradient(108.5deg, rgba(36, 36, 36, 0.7) -5.86%, rgba(22, 31, 68, 0.7) 100.57%);
+}
+
+.change_pass .modal-content {
+    background: unset !important;
+    border: none !important;
+    box-shadow: unset !important;
+}
+
+.change_pass .modal-body {
+    padding: 0;
+}
+
+.change_pass a.close-btn {
+    z-index: 3;
+}
+
+.change_pass .mainpage-wrap {
+    min-height: unset;
+}
+
+.change_pass .overlay_col {
+    background: unset !important;
+}
+
+.change_pass section.login-theme {
+    background-image: unset !important;
+    padding: 0;
+    min-height: unset;
+}
+
+.change_pass .login_inner {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(95, 166, 153, 0.88) 0%, rgba(12, 16, 46, 0.88) 89.58%);
+    border: 0.704378px solid #46c7a8;
+    box-shadow: inset 0px 7px 9px rgb(40 111 120 / 50%);
+    border-radius: 12px;
+}
+
+.change_pass2 h5.log-head {
+    position: relative;
+    top: -20px;
+}
+
+.change_pass .login_inner {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(95, 166, 153, 0.88) 0%, rgba(12, 16, 46, 0.88) 89.58%);
+    border: 0.704378px solid #46c7a8;
+    box-shadow: inset 0px 7px 9px rgb(40 111 120 / 50%);
+    border-radius: 12px;
+}
+
+.cryto_name_top {
+    width: 25%;
+    margin: 0px auto 60px;
+}
+
+hr.custom_hr {
+    height: 1px !important;
+    opacity: 1;
+    border-top: 1px solid #6fbbb4;
+}
+
+.chain_name {
+    display: none;
+}
+
+.cryto_name {
+    border: 0.7px solid #46c7a8;
+    border-radius: 8px;
+    padding: 5px 0;
+}
+
+.cryto_name p {
+    margin: 0;
+    color: #fff;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 159.5%;
+    text-transform: uppercase;
+}
+
+span.wallet_balnce_onmobile {
+    color: #37a7a5;
+    display: none;
+}
+
+.copy_Code {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 27px;
+}
+
+.code_here {
+    border: 0.7px solid #42ae99;
+    border-radius: 8px;
+    padding: 4px 7px;
+    width: 67%;
+}
+
+.code_here p {
+    margin: 0;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 203.5%;
+    text-align: center;
+    letter-spacing: 0.045em;
+    color: #53fff5;
+}
+
+.adress-here {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 38px;
+}
+
+button.copy_code_btn,
+button.copy_code_btn:hover,
+button.copy_code_btn.active,
+button.copy_code_btn:focus {
+    background: linear-gradient(180deg, rgba(118, 242, 220, 0.45) 0%, rgba(2, 10, 49, 0.54) 100%);
+    border: 0.7px solid #3daf99;
+    box-shadow: inset 0px 7px 9px #286f78;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.send_reciece_btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32%;
+    margin: 60px auto;
+    gap: 30px;
+}
+
+.btn-one {
+    width: 106px;
+}
+
+.inventory_heading {
+    color: #fff;
+    font-weight: 700;
+    padding: 0px 2px 10px 0px;
+}
+
+.with_fillte-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.market_tabs .clearfix {
+    background: linear-gradient(180deg, rgba(99, 107, 145, 0.37) 0%, rgba(62, 98, 242, 0) 100%);
+    border: 0.5px solid #2e3762;
+    box-shadow: inset 0px 6px 6px rgb(27 20 49 / 90%);
+    filter: drop-shadow(0px 3px 6px rgba(11, 14, 29, 0.37));
+    border-radius: 12px;
+    width: 370px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+    padding: 2px;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.inventory-dash .market_tabs .clearfix,
+section.profile_section .profile-tabbing .clearfix {
+    width: 462px;
+}
+
+section.inventory-dash .market_tabs .clearfix {
+    position: unset;
+    margin-bottom: 40px;
+}
+
+div.tab-frame input {
+    display: none;
+}
+
+div.tab-frame label {
+    display: block;
+    float: left;
+    padding: 10px 31px;
+    cursor: pointer !important;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 26px;
+    color: #48517e;
+    text-align: center;
+}
+
+.market_tabs .clearfix label {
+    width: 33.33%;
+}
+
+.tab-frame input:checked+label {
+    cursor: default;
+    background: linear-gradient(180deg, rgba(142, 91, 207, 0.49) 0%, rgba(62, 98, 242, 0) 100%);
+    border: 0.5px solid #2e3762;
+    box-shadow: inset 0px 0px 6px rgba(27, 20, 49, 0.9);
+    filter: drop-shadow(0px 1px 2px #111524);
+    border-radius: 8px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 26px;
+    color: #dcccff;
+    border-radius: 11px;
+}
+
+.no_data {
+    /* height: 100vh; */
+    text-align: center;
+    color: #fff;
+    margin-top: 20px;
+    width: 100%;
+}
+
+a.inventory_back,
+a.inventory_back:hover {
+    position: absolute;
+    left: 100px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    text-decoration: none;
+    color: #4ab05a;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 26px;
+    top: 8px;
+}
+
+.Pirates_here,
+.Ships-main {
+    width: 100%;
+    /* margin-left: 85px !important; */
+}
+
+.common_market_tab {
+    margin: 33px 0;
+}
+
+.parates_list ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 12px;
+    row-gap: 24px;
+}
+
+.ship_list ul {
+    gap: 39px;
+}
+
+.parates_list ul li {
+    width: 19%;
+    cursor: pointer !important;
+}
+
+.ship_list ul li {
+    width: 17%;
+}
+
+.nft_nameidhere {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    /* left: 15px; */
+    right: 0;
+    margin: 0px auto;
+    /* border: 0.5px solid #ffffff91; */
+    border-radius: 4px;
+    width: 100%;
+    /* max-width: 92px; */
+    text-align: center;
+    /* box-shadow: 0px 3px 5px #2d2c2c7a; */
+}
+
+img.img-fluid.level_bg {
+    width: 100%;
+    height: 100%;
+    /* object-fit: scale-down; */
+    object-fit: cover;
+    cursor: pointer !important;
+}
+
+.nft_nameidhere p {
+    margin: 0;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 2px 3px 7px #000;
+}
+
+.right_filleer {
+    width: 12%;
+    transition: 0.6s ease-in-out;
+    margin-top: 31px;
+}
+
+section.filter_here {
+    background: linear-gradient(180deg, #1e293e 0%, #353e63 100%);
+    box-shadow: -4px -1px 5px #121629;
+    border-radius: 13px 0px 0px 13px;
+    padding: 15px 0px 15px 40px;
+    height: 100vh;
+    min-height: 100%;
+}
+
+h5.filter-head {
+    color: #ffffff;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    margin: 0;
+    border-bottom: 1px solid var(--theme-textcolor);
+    padding-bottom: 13px;
+}
+
+a.close_fillter {
+    display: none;
+}
+
+.input_Wrap {
+    padding-right: 27px;
+}
+
+.radio-a {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+}
+
+h5.filter-head-class {
+    color: #ffffff;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    margin: 0;
+}
+
+ul.radio-a {
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+ul.radio-a li {
+    width: 43% !important;
+    -webkit-width: 43% !important;
+}
+
+.radio-a input[type="checkbox"] {
+    position: absolute;
+    white-space: nowrap;
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+}
+
+.radio-a-label {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid #8be6f0;
+    filter: drop-shadow(0px 2px 4px #15383c);
+    width: 100%;
+    height: 37px !important;
+    font-size: 14px !important;
+    border-radius: 13px;
+    color: #fff !important;
+    cursor: pointer !important;
+    background: transparent;
+    text-align: center;
+    letter-spacing: 0.09em;
+    font-family: "Nunito" !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: 159.5% !important;
+    padding: 20px 10px !important;
+}
+
+div.tab-frame label {
+    display: block;
+    float: left;
+    padding: 10px 31px;
+    cursor: pointer !important;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 26px;
+    color: #48517e;
+    text-align: center;
+}
+
+div.tab-frame input:checked+label {
+    cursor: default;
+    background: linear-gradient(180deg, rgba(142, 91, 207, 0.49) 0%, rgba(62, 98, 242, 0) 100%);
+    border: 0.5px solid #2e3762;
+    box-shadow: inset 0px 0px 6px rgba(27, 20, 49, 0.9);
+    filter: drop-shadow(0px 1px 2px #111524);
+    border-radius: 8px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 26px;
+    color: #dcccff;
+    border-radius: 11px;
+}
+
+.radio-a input[type="checkbox"]:checked+.radio-a-label {
+    background: linear-gradient(180deg, #6e66a4 0%, #323854 100%);
+    border: 0.5px solid #dfdcff;
+    box-shadow: 0px 2px 4px #15383c;
+    cursor: default;
+}
+
+.scroll_Col ul.radio-a {
+    height: 100%;
+}
+
+.left_Market {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+section.footer-main {
+    background: linear-gradient(0deg, #00c180 0%, rgba(131, 216, 185, 0.333333) 40%, rgb(27 33 57 / 15%) 100%);
+    background-color: rgba(0, 0, 0, 0);
+    background-color: #00c180;
+    background-color: #19203c;
+    padding: 80px 0px 10px;
+}
+
+.footerUl {
+    display: flex;
+}
+
+.footerUl ul {
+    padding: 0;
+    list-style: none;
+    margin-right: 80px;
+}
+
+.footerUl ul li {
+    list-style-type: none;
+    text-align: left;
+}
+
+.footerUl ul li a::after {
+    content: "";
+    height: 2px;
+    background: rgba(4, 253, 163, 1);
+    width: 0;
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    transition: 1s ease-in-out 0s;
+}
+
+.footerUl ul li a {
+    text-decoration: none;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 44px;
+    color: #ffffff;
+    text-align: left;
+    position: relative;
+}
+
+ul.social-icons {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 30px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+ul.social-icons li {
+    list-style-type: none;
+}
+
+.Copyright-fotter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Copyright-fotter p {
+    margin: 0;
+    color: #fff;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 26px;
+}
+
+.socialdown ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 35px;
+}
+
+.socialdown ul li {
+    list-style-type: none;
+}
+
+.socialdown ul li a {
+    text-decoration: none;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+    color: #7bffc0;
+    border-bottom: 1px solid #7bffc0;
+}
+
+.footerUl ul li a:hover::after {
+    width: 100%;
+    transition: 1s ease-in-out 0s;
+}
+
+ul#pagination {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+ul#pagination li a {
+    transition: all 100ms ease-in-out 0s;
+    background-color: #F7F7F8;
+    border-radius: 5px 5px 5px 5px;
+    color: #69696E;
+    display: block;
+    font: 12px/30px Arial, sans-serif;
+    height: 30px;
+    margin: 0 3px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 30px;
+}
+
+ul#pagination li.disabled span {
+    color: #fff;
+    letter-spacing: 4px;
+    line-height: 3;
+    display: block;
+    width: 20px;
+    text-align: center;
+}
+
+.btlshp_ifr {
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 120px;
+    height: 680px;
+}
+
+.cryto_name_top {
+    width: 30%;
+}
+
+.userProfileLink {
+    justify-content: center;
+}
+
+/*.container {*/
+/*    padding: 0 !important;*/
+/*}*/
+
+
+
+/*.battle_inner.text-center {*/
+/*    background: linear-gradient(180deg, rgba(77, 209, 185, 0.17) 0%, #46c7a86b 40%, #192c32 100%);*/
+/*    border: 1px solid #46c7a8;*/
+/*    box-shadow: 0px 4px 5px rgb(15 18 32 / 72%), inset 0px 7px 9px #286f78;*/
+/*    border-radius: 13px;*/
+/*    padding: 10px;*/
+/*}*/
+
+ul#pagination li a.disabled {
+    background: linear-gradient(150deg, rgb(191, 191, 191), rgb(38, 46, 47)) !important;
+    color: #fff !important;
+    cursor: not-allowed;
+}
+
+ul#pagination li a:hover,
+ul#pagination li a.active {
+    background: linear-gradient(150deg, rgb(4, 253, 163), rgb(49, 98, 104));
+    color: #fff;
+}
+
+.animate__animated {
+	background: linear-gradient(180deg, rgba(77, 209, 185, 0.6) 0%, #192C32 100%);
+	border: 1px solid #46C7A8;
+	box-shadow: 0px 4px 5px rgb(15 18 32 / 72%), inset 0px 7px 9px #286F78;
+	border-radius: 12px;
+	color: #fff;
+}
+
+.swal2-success-fix, .swal2-success-circular-line-right, .swal2-success-circular-line-left {
+    display: none;
+}
+
+
+.wallet-section .dropdown button.btn.btn-secondary:hover {
+    transform: none !important;
+}
+
+.wallet-section .dropdown button.wallet_adress:focus {
+    color: #fff !important;
+}
+
+
+
+
+@media only screen and (min-width: 1360px) and (max-width: 1800px) {
+    .span-inventory {
+        color: #fff !important;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        text-decoration: none;
+        color: #fff;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 26px;
+        position: relative;
+    }
+}
+
+.radio-a-label {
+    font-size: 15px !important;
+    line-height: 123.5% !important;
+}
+
+.right_filleer {
+    width: 23%;
+}
+
+.nft_nameidhere p {
+    font-size: 13px;
+}
+
+section.login-theme {
+    /*background-size: 77%;*/
+    /*padding: 170px 0 440px;*/
+}
+}
+
+@media only screen and (max-width: 1360px) {
+    .parates_list ul {
+        gap: 20px;
+    }
+
+    .custom_container {
+        margin: 0 40px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+
+    .login_inner {
+        width: 46%;
+    }
+}
+
+@media only screen and (max-width: 1169px) {
+    .ship_list ul li {
+        width: 23%;
+    }
+
+    /*a.navbar-brand {*/
+    /*    width: 130px;*/
+    /*}*/
+
+    /*.login_inner {*/
+    /*    width: 46%;*/
+    /*}*/
+}
+
+@media (max-width: 1099px) {
+    .common_padding_main {
+        padding: 180px 0 20px;
+    }
+
+    .profile_bio {
+        padding: 30px 20px;
+    }
+
+    .bio_content {
+        width: 60%;
+    }
+    
+    section.login-theme {
+        background-size: 100%;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .login_inner {
+        width: 56%;
+    }
+
+    .profile_user {
+        width: 73%;
+    }
+}
+
+@media only screen and (max-width: 979px) {
+    .ship_list ul li {
+        width: 31%;
+    }
+
+    .custom_container {
+        margin: 0 26px;
+    }
+}
+
+@media only screen and (max-width: 799px) {
+
+    a.inventory_back,
+    a.inventory_back:hover {
+        left: 40px;
+    }
+
+    .bio_content h4,
+    .bio_content h5,
+    .bio_content h6 {
+        font-size: 18px;
+        line-height: 18px;
+        word-break: break-all;
+    }
+
+    section.login-theme {
+        /*padding: 110px 0 70px;*/
+        background-size: 100%;
+        background-position: 38% 40px;
+    }
+
+    .login_inner {
+        width: 66%;
+    }
+
+    .login-alert {
+        width: 100%;
+        margin-top: 1% !important;
+        left: unset;
+        color: #ff0000 !important;
+    }
+
+    .login-success {
+        margin-top: 1% !important;
+        width: 35.5%;
+        left: 32%;
+        color: #32914b !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+
+    .footerUl,
+    ul.social-icons {
+        justify-content: center;
+    }
+
+    .footerUl,
+    ul.social-icons {
+        justify-content: center;
+    }
+
+    .ship_list ul li {
+        width: 48%;
+    }
+
+    .with_fillte-wrap .clearfix label {
+        width: 33.33%;
+        padding: 4px 23px;
+        text-align: center;
+    }
+
+    section.inventory-dash .market_tabs .clearfix {
+        position: relative;
+        margin-bottom: 40px;
+        right: 0;
+        top: 0px;
+        width: 90%;
+    }
+
+    .market_tabs .clearfix {
+        right: 0;
+        top: -65px;
+        width: 70%;
+    }
+
+    a.inventory_back,
+    a.inventory_back:hover {
+        top: 68px;
+    }
+
+    .bio_content {
+        width: 70%;
+    }
+
+    .edit_btn {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .profile_user {
+        width: 100%;
+        display: flex;
+    }
+
+    .profile_bio {
+        display: block;
+    }
+
+  
+
+    .common_padding_main {
+        padding: 120px 0 20px;
+    }
+
+    .login_inner {
+        width: 76%;
+        padding: 50px 55px;
+    }
+    
+    .comon-token {
+	padding: 4px;
+	
+}
+
+.comon-token img {
+	    width: 19px;
+    height: 17px;
+}
+
+.comon-token p {
+	font-size: 12px;
+}
+
+.wallet-section .dropdown button.wallet_adress {
+	    height: 35px;
+    font-size: 12px;
+}
+
+.arrow-down {
+	bottom: 7px;
+}
+
+.wallet-section .dropdown .dropdown-menu {
+min-width: auto;
+}
+
+.wallet-section .dropdown .dropdown-menu button a {
+	font-size: 12px;
+}
+
+.desktop_user .dropdown:first-child .dropdown-menu.show button.btnbottom {
+    max-width: 170px;
+	padding: 5px 20px;
+}
+
+.dropdown-item .user_profile_img {
+	visibility: hidden;
+}
+
+.wallet-section .dropdown button.btn.btn-secondary:not(.wallet_adress) {
+	    width: 37px;
+    height: 34px;
+}
+
+.wallet-section .dropdown button.btn.btn-secondary img {
+    height: 30px;
+    width: 30px;
+	visibility: visible;
+}
+
+.dropdown-item {
+	padding: 5px 20px;
+}
+
+.logout_bnt {
+	padding: 9px 10px 1px;
+}
+
+a.navbar-brand {
+    max-width: 160px;
+}
+
+.custom_container {
+    height: 75px;
+}
+
+a.wallet_back,
+    a.wallet_back:hover {
+        position: unset;
+        margin-bottom: 10px;
+    }
+    
+.userProfileLink {
+    justify-content: normal;
+}
+
+.connet_wallet, ul.connect_navbar-nav a {
+    height: 34px;
+    font-size: 12px;
+    width: 95px;
+}
+
+.connet_wallet svg {
+    height: 20px;
+    width: 20px;
+}
+
+
+
+
+}
+
+@media only screen and (max-width: 639px) {
+    ul.social-icons li a svg {
+        height: 30px !important;
+        width: 30px !important;
+    }
+
+    ul.social-icons {
+        margin: 16px 0;
+    }
+
+    .socialdown ul {
+        justify-content: center;
+    }
+
+    .Copyright-fotter {
+        justify-content: center;
+        flex-direction: column-reverse;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .Copyright-fotter p {
+        line-height: 20px;
+    }
+
+    ul.social-icons {
+        margin: 16px 0;
+    }
+
+    section.footer-main {
+        padding: 30px 10px 10px;
+    }
+
+    .footerUl {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .footerUl ul {
+        margin: 0;
+        margin-bottom: 0px;
+        width: 50%;
+        margin-bottom: 20px;
+    }
+
+    .ship_list ul li {
+        width: 100%;
+    }
+
+    .inventory-dash .with_fillte-wrap {
+        display: block;
+    }
+
+    h3.inventory_heading {
+        display: none;
+    }
+
+    .bio_content {
+        width: 100%;
+        text-align: center;
+    }
+
+    .user_img,
+    .view_private_key {
+        margin: 0px auto;
+    }
+
+    .profile_user {
+        display: block;
+    }
+
+
+    .login_inner {
+        width: 90%;
+        padding: 50px 50px;
+    }
+
+    
+    
+         
+    .navbar-brand {
+        margin-right: 2px;
+    }
+    
+    .me-3 {
+      margin-right: 2px !important;  
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    .with_fillte-wrap .clearfix label {
+        padding: 6px 13px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    section.inventory-dash .market_tabs .clearfix {
+        width: 80%;
+    }
+
+    .market_tabs .clearfix {
+        width: 88%;
+        left: 0px;
+    }
+
+    .change_pass2 {
+        padding: 40px 20px;
+        background: linear-gradient(180deg, rgb(77 209 185 / 47%) 0%, #192c32 100%);
+    }
+
+    .profile_bio {
+        width: auto;
+    }
+
+    .login_inner {
+        width: 100%;
+        padding: 40px 40px;
+    }
+
+    /*a.navbar-brand {*/
+    /*    width: 130px;*/
+    /*    margin: 0;*/
+    /*}*/
+   a.navbar-brand {
+    max-width: 140px;
+}
+    
+    .comon-token {
+        display:none;
+    }
+    
+    .custom_container {
+    margin: 0 5px;
+}
+    
+    #header {
+    justify-content: center;
+}
+
+    .overlay_col {
+        top: -30px;
+        transform: unset;
+        height: unset !important;
+    }
+
+    /*section.header-main {*/
+    /*     position: relative; */
+    /*    background: linear-gradient(180deg, #42a498 0%, rgba(29, 34, 55, 0) 70%);*/
+    /*    background-color: #1e2231;*/
+    /*    height: 80px;*/
+    /*    padding: 5px 0;*/
+    /*}*/
+
+    /*section.login-theme {*/
+        /*padding: 90px 0 70px;*/
+    /*    background-size: cover;*/
+        /* background-size: 100%; */
+    /*    background-position: 45% 0px;*/
+        /*z-index: 999;*/
+    /*}*/
+    
+
+    
+}
+
+@media (max-width: 390px) {
+    .parates_list ul {
+        gap: 24px;
+    }
+
+    section.inventory-dash .market_tabs .clearfix {
+        width: 88%;
+    }
+
+    a.inventory_back,
+    a.inventory_back:hover {
+        left: 20px;
+    }
+
+    .with_fillte-wrap {
+        display: flex;
+    }
+
+    .bio_content h4,
+    .bio_content h5,
+    .bio_content h6 {
+        font-size: 17px;
+        line-height: 24px;
+    }
+
+}
+
+@media (max-width: 375px) {
+    .parates_list ul {
+        gap: 22px;
+    }
+
+    div.tab-frame input:checked+label,
+    div.tab-frame label {
+        font-size: 14px;
+        line-height: 21px;
+        border-radius: 6px;
+    }
+
+    .market_tabs .clearfix {
+        top: -65px;
+    }
+
+    .edit_btn {
+        display: block;
+    }
+
+    .bio_content .d-flex {
+        display: block !important;
+    }
+
+    .login_inner {
+        padding: 30px 20px;
+    }
+}
+
+@media only screen and (max-width: 359px) {
+    section.inventory-dash .market_tabs .clearfix {
+        width: 90%;
+    }
+
+    .market_tabs .clearfix {
+        top: -66px;
+        width: 86%;
+        left: 0;
+    }
+}
+
+@media only screen and (max-width: 1169px){
+.cryto_name_top {
+    width: 35%;
+}
+}
+
+@media only screen and (max-width: 979px){
+.cryto_name_top {
+    width: 45%;
+}
+}
+
+@media only screen and (max-width: 767px){
+.cryto_name_top {
+    width: 70%;
+}
+}
+
+
+@media only screen and (max-width: 639px){
+.cryto_name_top {
+    margin: 30px auto;
+}
+}
+
+@media only screen and (max-width: 479px){
+.cryto_name_top, .market_tabs .clearfix {
+    width: 100%;
+}
+}

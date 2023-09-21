@@ -1,0 +1,122 @@
+.main-position-relative {
+    display: flex;
+    justify-content: center;
+    z-index: 0;
+}
+
+section.login-theme {
+    padding: 0;
+}
+
+.postersN {
+    background: none;
+    border: none;
+    box-shadow: none;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+}
+
+.postersContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 150px;
+}
+
+.create_account {
+    position: relative;
+}
+
+
+.battleshipPoster {
+    width: 100%;
+    height: 230px;
+    width: 200px;
+
+}
+
+.create_account {
+    border: none;
+    height: auto;
+    width: auto;
+}
+
+.posters {
+    background: rgba(70, 85, 137, 1);
+    border-radius: 3px;
+    color: #6BDCFF;
+}
+
+a.create_account:hover .posters {
+    color: #fff;
+}
+
+.coming-soon-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-45deg);
+    /* make it diagonal */
+    font-weight: bold;
+    color: rgba(107, 220, 255, 0.7);
+}
+
+.btn-secondary {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: none;
+    border: none;
+    box-shadow: 0px 10px 20px -5px rgba(107, 220, 255, 0.7);
+    transform: translateY(-5px);
+}
+
+
+
+
+
+.btn.btn-secondary:not(:disabled):not(.disabled):active,
+.btn.btn-secondary:not(:disabled):not(.disabled):active:focus,
+.btn.btn-secondary:focus {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    color: inherit;
+    /* Assuming you want to keep the color, but you can change it */
+    outline: none;
+    /* This will remove the browser's default focus outline */
+}
+
+.btn,
+.create_account {
+    padding: 0;
+}
+
+@media only screen and (max-width: 1169px) {
+    /*.postersN {*/
+    /*    width: 100%;*/
+    /*}*/
+}
+
+
+@media only screen and (max-width: 767px) {
+    .postersContainer {
+    margin-top: 110px;
+}
+}
+
+@media only screen and (max-width: 503px) {
+    /*.postersN {*/
+    /*    margin-top: 350px;*/
+    /*}*/
+}
