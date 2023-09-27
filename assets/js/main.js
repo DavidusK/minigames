@@ -371,6 +371,15 @@ $(document).on("change", "#profile_form #userProfileImg", async function (event)
     }
 })
 
+
+$(document).on("click", '[data-action="reveal-password"]', async function (event) {
+    event.preventDefault();
+    $(this).addClass('d-none').siblings("svg").removeClass("d-none").siblings("input").removeClass("d-none");
+    let passwordInput = $(this).closest(".eye-icon").parent().find("input");
+    passwordInput.attr("type", passwordInput.attr("type") === "password" ? "text" : "password");
+})
+
+
 $(document).on("click", "input[name='inventory_tab']", async function () {
     let collectionName = $(this).val();
     await getInventoryList(collectionName, 1);
@@ -409,7 +418,7 @@ $(document).on('submit','#registerForm', async function(e){
         let params = { "email" : email, "username" : username, "password" : password, "promoCode" : promo_code };
         let response = await callHttpRequest(appUrl, params, "POST", "");
         if(response.status === 'success') {
-            showAlert("error", response.message);
+            showAlert("success", response.message);
             setTimeout(function () { location.replace(APP_URL + '/login'); }, 2000);
         } else {
             let message = response.message.replace("_", " ").toLocaleLowerCase().charAt(0).toUpperCase() + response.message.replace("_", " ").toLocaleLowerCase().slice(1);
@@ -422,20 +431,37 @@ $(document).on('click','#verification-code', async function(e){
     e.preventDefault();
     let appUrl = `${API_BASE_URL}user/sendEmailVerificationOtp`;
     let email = "";
-    if ($("#change-password #email").length > 0) {
+    if($("#change-password #email").length > 0)
         email = $("#change-password #email").val();
-    }else{
+    else
         email = $("#registerForm #email").val();
-    }
     let params = {'email': email};
-    let response = await callHttpRequest(appUrl, params, "POST", "");
-    if(response.status === 'success') {
-        showAlert("success", "OTP send on your mail successfully");
-        setCookie('encrypt', response.data, 365);
-    }
-    else{
-        let message = response.message.replace("_", " ").toLocaleLowerCase().charAt(0).toUpperCase() + response.message.replace("_", " ").toLocaleLowerCase().slice(1);
-        showAlert("error", message);
+    let text = $('#verification-code').html();
+    if(text == "Get"){
+        let response = await callHttpRequest(appUrl, params, "POST", "");
+        if(response.status === 'success') {
+            let counter = 60;
+            let message = response.message.replace(/\b\w/g, function(match) { return match.toUpperCase(); });
+            $(this).after(`<p class="code-msg text-white text-center">The code was successfully sent</p>`);
+            showAlert("success", message);
+            setCookie('encrypt', response.data, 365);
+            setInterval(function() { $(".code-msg").remove() },10000);
+            let interval = setInterval(function() {
+                counter--;
+                if (counter <= 0) {
+                    clearInterval(interval),$('#verification-code').html("Get");
+                    counter = 60;
+                    return;
+                }
+                else{
+                    $('#verification-code').text(`${counter}s`);            
+                }
+            }, 1000);
+        }
+        else{
+            let message = response.message.replace("_", " ").toLocaleLowerCase().charAt(0).toUpperCase() + response.message.replace("_", " ").toLocaleLowerCase().slice(1);
+            showAlert("error", message);
+        }
     }
 });
 
