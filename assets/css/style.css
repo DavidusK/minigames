@@ -1559,19 +1559,6 @@ ul#pagination li.disabled span {
     justify-content: center;
 }
 
-/*.container {*/
-/*    padding: 0 !important;*/
-/*}*/
-
-
-
-/*.battle_inner.text-center {*/
-/*    background: linear-gradient(180deg, rgba(77, 209, 185, 0.17) 0%, #46c7a86b 40%, #192c32 100%);*/
-/*    border: 1px solid #46c7a8;*/
-/*    box-shadow: 0px 4px 5px rgb(15 18 32 / 72%), inset 0px 7px 9px #286f78;*/
-/*    border-radius: 13px;*/
-/*    padding: 10px;*/
-/*}*/
 
 ul#pagination li a.disabled {
     background: linear-gradient(150deg, rgb(191, 191, 191), rgb(38, 46, 47)) !important;
@@ -1597,6 +1584,23 @@ ul#pagination li a.active {
     display: none;
 }
 
+div:where(.swal2-container).swal2-center>.swal2-popup  {
+    background: linear-gradient(180deg, rgba(77, 209, 185, 0.6) 0%, #192C32 100%) !important;
+    border: 1px solid #46C7A8 !important;
+	box-shadow: 0px 4px 5px rgb(15 18 32 / 72%), inset 0px 7px 9px #286F78 !important;
+}
+
+div:where(.swal2-container) h2:where(.swal2-title) {
+    color: #fff !important;
+}
+
+div:where(.swal2-container) .swal2-html-container {
+    color: #fff !important;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+    background-color: #46C7A8 !important;
+}
 
 .wallet-section .dropdown button.btn.btn-secondary:hover {
     transform: none !important;
@@ -1605,7 +1609,6 @@ ul#pagination li a.active {
 .wallet-section .dropdown button.wallet_adress:focus {
     color: #fff !important;
 }
-
 
 
 
@@ -1624,7 +1627,7 @@ ul#pagination li a.active {
         line-height: 26px;
         position: relative;
     }
-}
+
 
 .radio-a-label {
     font-size: 15px !important;
@@ -1639,10 +1642,6 @@ ul#pagination li a.active {
     font-size: 13px;
 }
 
-section.login-theme {
-    /*background-size: 77%;*/
-    /*padding: 170px 0 440px;*/
-}
 }
 
 @media only screen and (max-width: 1360px) {
@@ -2038,10 +2037,6 @@ a.wallet_back,
         padding: 40px 40px;
     }
 
-    /*a.navbar-brand {*/
-    /*    width: 130px;*/
-    /*    margin: 0;*/
-    /*}*/
    a.navbar-brand {
     max-width: 140px;
 }
@@ -2062,26 +2057,7 @@ a.wallet_back,
         top: -30px;
         transform: unset;
         height: unset !important;
-    }
-
-    /*section.header-main {*/
-    /*     position: relative; */
-    /*    background: linear-gradient(180deg, #42a498 0%, rgba(29, 34, 55, 0) 70%);*/
-    /*    background-color: #1e2231;*/
-    /*    height: 80px;*/
-    /*    padding: 5px 0;*/
-    /*}*/
-
-    /*section.login-theme {*/
-        /*padding: 90px 0 70px;*/
-    /*    background-size: cover;*/
-        /* background-size: 100%; */
-    /*    background-position: 45% 0px;*/
-        /*z-index: 999;*/
-    /*}*/
-    
-
-    
+    }      
 }
 
 @media (max-width: 390px) {
