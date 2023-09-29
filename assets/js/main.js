@@ -445,11 +445,10 @@ $(document).on('click','#verification-code', async function(e){
             $(this).after(`<p class="code-msg text-white text-center">The code was successfully sent</p>`);
             showAlert("success", message);
             setCookie('encrypt', response.data, 365);
-            setInterval(function() { $(".code-msg").remove() },10000);
             let interval = setInterval(function() {
                 counter--;
                 if (counter <= 0) {
-                    clearInterval(interval),$('#verification-code').html("Get");
+                    clearInterval(interval),$('#verification-code').html("Get"),$(".code-msg").remove();
                     counter = 60;
                     return;
                 }
@@ -510,14 +509,16 @@ const timerIncrement = () => {
 
 let idleTimer = 0;
 $(document).ready(async function () {
-    await switchNetwork();
     let userAuth = getCookie("userLogin");
-    let walletAddress = getCookie("minigameWalletAddress");
-    await checkBalance(walletAddress);
-    let walletBalance = getCookie("minigameWalletBalance");
-    // console.log(walletBalance);
-    let data = $(this).serialize();
     if(userAuth && userAuth !== null){
+        let walletAddress = getCookie("minigameWalletAddress");
+        if(walletAddress)
+            await switchNetwork();
+        await checkBalance(walletAddress);
+        let walletBalance = getCookie("minigameWalletBalance");
+        // console.log(walletBalance);
+        let data = $(this).serialize();
+
         setInterval(timerIncrement, 60000);
         $(this).mousemove(function (e) { idleTimer = 0; });
         $(this).keypress(function (e) { idleTimer = 0; });
