@@ -1,10 +1,12 @@
 let provider;
 const API_BASE_URL = "https://api.piratepets.io/api/v1/";
 // const API_BASE_URL = "https://api-dev.piratepets.io/api/v1/";
-const showAlert = (errotType, errorMsg) =>{ Swal.fire({ icon: errotType, title: errorMsg, position: 'center', showConfirmButton: false, timer: 1500, showClass: { popup: 'animate__animated animate__fadeInDown' }, hideClass: { popup: 'animate__animated animate__fadeOutUp'} }) }
+const showAlert = (errotType, errorMsg, timer = 1500) =>{ Swal.fire({ icon: errotType, title: errorMsg, position: 'center', showConfirmButton: false, timer: timer, showClass: { popup: 'animate__animated animate__fadeInDown' }, hideClass: { popup: 'animate__animated animate__fadeOutUp'} }) }
 const currentChainId = async () => { return await provider.request({ method: "eth_chainId" }) }
 const ethHexValue = (value) => { return ethers.utils.hexValue(parseInt(value)) }
 const copyToolout = () => { document.getElementById("myTooltip").innerHTML = "Copy to clipboard"; }
+// CHECK DEVICE
+const isMobile = () => { let i = !1; return !function (e) { (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(e) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(e.substr(0, 4))) && (i = !0) }(navigator.userAgent || navigator.vendor || window.opera), i };
 
 const copyToolText = () => {
     let walletAddress = getCookie("minigameWalletAddress");
@@ -165,29 +167,35 @@ const createPaginationLinks = async (total, page, limit, links) => {
 }
 
 $(document).on("click", "#connect", async function () {
-    if (!window.ethereum || !window.ethereum.isMetaMask) {
-        window.open("https://metamask.io/download", "_blank");
+    if (isMobile()) {
+        showAlert("info", "If you are on a mobile phone,<br>Please use MetaMask application's browser to connect.", 10000);
     }
-    else {
-        if (typeof window.ethereum !== "undefined") {
-            const [account] = await window.ethereum.request({ method: "eth_requestAccounts" });
-            let userAuth = getCookie("userLogin");
-            let data = { walletAddress: account };
-            let appUrl = `${API_BASE_URL}user/updateProfile`;
-            let response = await callHttpRequest(appUrl, data, "POST", userAuth);
-            if (response.status == "failure") {
-                showAlert("error", response.message);
-            }
-            else {
-                $('.wallet_address').html(`${account.slice(0, 8)}...${account.slice(33)}`);
-                $(".wallet_connect").addClass("d-none");
-                $(".wallet_address_wrap").removeClass("d-none");
-                setCookie("minigameWalletAddress", account, 365);
-                checkBalance(account);
+    else{
+        if (!window.ethereum || !window.ethereum.isMetaMask) {
+            window.open("https://metamask.io/download", "_blank");
+        }
+        else {
+            if (typeof window.ethereum !== "undefined") {
+                const [account] = await window.ethereum.request({ method: "eth_requestAccounts" });
+                let userAuth = getCookie("userLogin");
+                let data = { walletAddress: account };
+                let appUrl = `${API_BASE_URL}user/updateProfile`;
+                let response = await callHttpRequest(appUrl, data, "POST", userAuth);
+                if (response.status == "failure") {
+                    showAlert("error", response.message);
+                }
+                else {
+                    $('.wallet_address').html(`${account.slice(0, 8)}...${account.slice(33)}`);
+                    $(".wallet_connect").addClass("d-none");
+                    $(".wallet_address_wrap").removeClass("d-none");
+                    setCookie("minigameWalletAddress", account, 365);
+                    checkBalance(account);
+                }
             }
         }
     }
 });
+
 checkBalance = async (account) => {
     if(typeof account != "undefined"){
         let appUrl = `${API_BASE_URL}setting/view`;
@@ -196,27 +204,31 @@ checkBalance = async (account) => {
         let networkUrls = response.data.blockchain[0].networkUrl;
         let filteredUrl = $.grep(networkUrls, function(network) { return network.type == networkMode });
         const web3 = new Web3(new Web3.providers.HttpProvider(filteredUrl[0].url));
-        var balance = parseFloat(web3.utils.fromWei( await web3.eth.getBalance(account) )).toFixed(4);
+        // var balance = parseFloat(web3.utils.fromWei( await web3.eth.getBalance(account) )).toFixed(4);
+        var balance = parseFloat(web3.utils.fromWei( await web3.eth.getBalance(account) ));
         // console.log(balance);
+        setCookie("minigameWalletBalance", balance.toString(), 365);
         $('.comon-token span.theme-text').html(`${balance}`);
-        setCookie("minigameWalletBalance", balance, 365);
     }
 }
+
 $(document).on('submit', '#loginForm', async function (event) {
     event.preventDefault();
+    let btn = $(this).find(':submit');
+    let prevText = btn.text();
+        btn.text("Please Wait...");
     let data = $(this).serialize();
     let appUrl = `${API_BASE_URL}user/login`;
     let response = await callHttpRequest(appUrl, data, "POST", "");
     if (response.status === 'success') {
-        // console.log(response.data);
         setCookie('userLogin', response.data.Token, 365),location.replace(APP_URL);
         setCookie('userInfo', JSON.stringify({ "_id" : response.data._id, "email" : response.data.email }), 365),location.replace(APP_URL);
     }
     else {
         let message = response.message.replace("_", " ").toLocaleLowerCase().charAt(0).toUpperCase() + response.message.replace("_", " ").toLocaleLowerCase().slice(1);
         showAlert("error", message);
-        $('#loginForm').find('input').val('')
     }
+    btn.text(prevText);
 });
 
 $(document).on('submit', '#forgot_password', async function (event) {
@@ -280,7 +292,6 @@ $(document).on('submit','#reset_password', async function(e){
     }
 });
 
-
 $(document).on("click", ".wallet_disconnect", function () {
     $('.wallet_address').html("");
     $(".wallet_connect").removeClass("d-none");
@@ -312,6 +323,9 @@ $(document).on("click", ".recovery_col", function () {
 
 $(document).on('click', '[data-action="update_profile"]', async function (event) {
     event.preventDefault();
+    let btn = $(this);
+    let prevText = btn.text();
+        btn.text("Please Wait...");
     let data = {};
     let username = $("#profile_form #user_name").val();
         data.username = username;
@@ -328,8 +342,8 @@ $(document).on('click', '[data-action="update_profile"]', async function (event)
     else {
         let message = response.message.replace("_", " ").toLocaleLowerCase().charAt(0).toUpperCase() + response.message.replace("_", " ").toLocaleLowerCase().slice(1);
         showAlert("error", message);
-        $('#profile_form').find('input').val('')
     }
+    btn.text(prevText);
 });
 
 $(document).on("click", "[data-action='remove-img']", async function (event) {
@@ -371,14 +385,12 @@ $(document).on("change", "#profile_form #userProfileImg", async function (event)
     }
 })
 
-
 $(document).on("click", '[data-action="reveal-password"]', async function (event) {
     event.preventDefault();
     $(this).addClass('d-none').siblings("svg").removeClass("d-none").siblings("input").removeClass("d-none");
     let passwordInput = $(this).closest(".eye-icon").parent().find("input");
     passwordInput.attr("type", passwordInput.attr("type") === "password" ? "text" : "password");
 })
-
 
 $(document).on("click", "input[name='inventory_tab']", async function () {
     let collectionName = $(this).val();
@@ -473,6 +485,9 @@ $(document).on('submit','#change-password', async function(e){
     let verify_code = $("#change-password input[name='verify_code']").val();
     let otpEncryption = getCookie("encrypt");
     let decrypted = CryptoJS.AES.decrypt(otpEncryption, email).toString(CryptoJS.enc.Utf8);
+    let btn = $(this).find(':submit');
+    let prevText = btn.text();
+        btn.text("Please Wait...");
     if(password != repeat_password){
         showAlert("error", "Please enter same password");
     }
@@ -491,6 +506,7 @@ $(document).on('submit','#change-password', async function(e){
             showAlert("error", message);
         }
     }
+    btn.text(prevText);
 });
 
 const timerIncrement = () => {

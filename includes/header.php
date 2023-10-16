@@ -1,17 +1,6 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
-    // set expires header
-header('Expires: Thu, 1 Jan 1970 00:00:00 GMT');
-
-// set cache-control header
-header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-header('Cache-Control: post-check=0, pre-check=0',false);
-
-// set pragma header
-header('Pragma: no-cache');
-?>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="<?=@APP_URL?>/assets/images/favicon.ico">
@@ -19,7 +8,7 @@ header('Pragma: no-cache');
     <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css " rel="stylesheet">    
     <link href="<?=@APP_URL?>/assets/css/style.css?v=<?=@rand()?>" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <title>Piratepets - Mini Games</title>
+    <title>Piratepets - The NFT GAME</title>
 </head>
 <body>
     <section class="header-main">
@@ -79,7 +68,7 @@ header('Pragma: no-cache');
                         <div class="desktop_user">
                             <!-- Wallet Address -->
                             <div class="dropdown wallet_address_wrap <?=@(isset($_COOKIE['minigameWalletAddress']) && $_COOKIE['minigameWalletAddress'] != "" ? "" : "d-none")?> d-flex">
-                                <a href="<?=@APP_URL?>/send-recive">
+                                <a href="<?=@APP_URL?>/send-recieve">
                                     <div class="comon-token">
                                         <img src="<?=@APP_URL?>/assets/images/bnb_icon.png" alt="" class="img-fluid">
                                         <p>BNB <span class="theme-text"><?=@$_COOKIE['minigameWalletBalance']?></span></p>
@@ -133,13 +122,15 @@ header('Pragma: no-cache');
                                 </button>
                                 <div class="dropdown-menu">
                                     <button tabindex="0" role="menuitem" class="dropdown-item">
-                                        <a class="userProfileLink" href="<?=@APP_URL?>/profile">
-                                            <span class="user_profile_email"><?=@$userInfo['email']?></span>
-                                            <?php if(@$userInfo['profileImage'] != ""): ?>
-                                                <img src="<?=@$userInfo['profileImage']['link']?>" alt="<?=@$userInfo['username']?>" class="user_profile_img img-fluid">
-                                            <?php else: ?>
-                                                <img src="<?=@APP_URL?>/assets/images/profileuser.png" alt="<?=@$userInfo['username']?>" class="user_profile_img img-fluid">
-                                            <?php endif ?>
+                                        <a href="<?=@APP_URL?>/profile">
+                                            <span class="user_profile_name"><?=@$userInfo['username']?></span>
+                                            <div style="top: -7px;right: -10px;position: absolute;">
+                                                <?php if(@$userInfo['profileImage'] != ""): ?>
+                                                    <img src="<?=@$userInfo['profileImage']['link']?>" alt="<?=@$userInfo['username']?>" class="user_profile_img img-fluid">
+                                                <?php else: ?>
+                                                    <img src="<?=@APP_URL?>/assets/images/profileuser.png" alt="<?=@$userInfo['username']?>" class="user_profile_img img-fluid">
+                                                <?php endif ?>
+                                            </div>
                                         </a>
                                     </button>
                                     <button tabindex="0" role="menuitem" class="btnbottom position-relative dropdown-item">
@@ -207,8 +198,4 @@ header('Pragma: no-cache');
             </div>
         </div>
     </section>
-    <script>
-function goBack() {
-    window.history.back();
-}
-</script>
+    
