@@ -10,7 +10,7 @@
 						<img src="<?=@APP_URL?>/assets/images/profileuser.png" alt="<?=@$userInfo['username']?>" class="user_profile_img img-fluid">
 					</div>
 					<div class="bio_content">
-						<h4 class="user_profile_name text-capitalize"><?=@$userInfo['username']?></h4>
+						<h4 class="user_profile_name"><?=@$userInfo['username']?></h4>
 						<h4 class="user_profile_email_profile"><?=@$userInfo['email']?></h4>
 						<div class="d-flex"></div>
 					</div>
