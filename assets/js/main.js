@@ -167,30 +167,28 @@ const createPaginationLinks = async (total, page, limit, links) => {
 }
 
 $(document).on("click", "#connect", async function () {
-    if (isMobile()) {
-        showAlert("info", "If you are on a mobile phone,<br>Please use MetaMask application's browser to connect.", 10000);
-    }
-    else{
-        if (!window.ethereum || !window.ethereum.isMetaMask) {
-            window.open("https://metamask.io/download", "_blank");
+    if (!window.ethereum || !window.ethereum.isMetaMask) {
+        window.open("https://metamask.io/download", "_blank");
+        if (isMobile()) {
+            window.location = 'https://metamask.app.link/dapp/https://mini-games.suffescom.dev';
         }
-        else {
-            if (typeof window.ethereum !== "undefined") {
-                const [account] = await window.ethereum.request({ method: "eth_requestAccounts" });
-                let userAuth = getCookie("userLogin");
-                let data = { walletAddress: account };
-                let appUrl = `${API_BASE_URL}user/updateProfile`;
-                let response = await callHttpRequest(appUrl, data, "POST", userAuth);
-                if (response.status == "failure") {
-                    showAlert("error", response.message);
-                }
-                else {
-                    $('.wallet_address').html(`${account.slice(0, 8)}...${account.slice(33)}`);
-                    $(".wallet_connect").addClass("d-none");
-                    $(".wallet_address_wrap").removeClass("d-none");
-                    setCookie("minigameWalletAddress", account, 365);
-                    checkBalance(account);
-                }
+    }
+    else {
+        if (typeof window.ethereum !== "undefined") {
+            const [account] = await window.ethereum.request({ method: "eth_requestAccounts" });
+            let userAuth = getCookie("userLogin");
+            let data = { walletAddress: account };
+            let appUrl = `${API_BASE_URL}user/updateProfile`;
+            let response = await callHttpRequest(appUrl, data, "POST", userAuth);
+            if (response.status == "failure") {
+                showAlert("error", response.message);
+            }
+            else {
+                $('.wallet_address').html(`${account.slice(0, 8)}...${account.slice(33)}`);
+                $(".wallet_connect").addClass("d-none");
+                $(".wallet_address_wrap").removeClass("d-none");
+                setCookie("minigameWalletAddress", account, 365);
+                checkBalance(account);
             }
         }
     }
