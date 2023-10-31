@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css " rel="stylesheet">    
     <link href="<?=@APP_URL?>/assets/css/style.css?v=<?=@rand()?>" rel="stylesheet">
+    <link href="<?=@APP_URL?>/assets/css/crystal.css?v=<?=@rand()?>" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <title>Piratepets - The NFT GAME</title>
 </head>
@@ -146,6 +147,18 @@
                                         <div class="arrow_inv">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 10 10" fill="none">
                                                 <path d="M3.75 1.87549L6.875 5.00049L3.75 8.12549" stroke="#8DBDF1" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <button tabindex="0" role="menuitem" class="btnbottom position-relative dropdown-item">
+                                        <a href="<?=@APP_URL?>/crystals">
+                                            <div class="dimoond_icon">
+                                                <img src="<?=@APP_URL?>/assets/images/diamond.png" alt="Crystals" class="img-fluid">
+                                            </div>Crystals
+                                        </a>
+                                        <div class="arrow_inv">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 10 10" fill="none">
+                                                <path d="M3.75 1.87549L6.875 5.00049L3.75 8.12549" stroke="#8195D6" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" ></path>
                                             </svg>
                                         </div>
                                     </button>

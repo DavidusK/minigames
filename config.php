@@ -1,7 +1,8 @@
 <?php
-define("APP_URL","https://minigames.piratepets.io");
-// define("APP_URL","http://localhost/minigames-new");
-define("API_BASE_URL","https://api.piratepets.io/api/v1/");
+// define("APP_URL","https://minigames.piratepets.io");
+define("APP_URL","http://localhost/minigames-crystal");
+// define("API_BASE_URL","https://api.piratepets.io/api/v1/");
+define("API_BASE_URL","https://api-dev.piratepets.io/api/v1/");
 define("ROOT_DIR",__DIR__);
 if(isset($_COOKIE['userLogin']) && $_COOKIE['userLogin'] != ""){
     $Url = API_BASE_URL."user/profile";

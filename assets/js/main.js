@@ -1,7 +1,12 @@
 let provider;
-const API_BASE_URL = "https://api.piratepets.io/api/v1/";
-// const API_BASE_URL = "https://api-dev.piratepets.io/api/v1/";
-const showAlert = (errotType, errorMsg, timer = 1500) =>{ Swal.fire({ icon: errotType, title: errorMsg, position: 'center', showConfirmButton: false, timer: timer, showClass: { popup: 'animate__animated animate__fadeInDown' }, hideClass: { popup: 'animate__animated animate__fadeOutUp'} }) }
+// const API_BASE_URL = "https://api.piratepets.io/api/v1/";
+const API_BASE_URL = "https://api-dev.piratepets.io/api/v1/";
+// const LAMBDA_BASE_URL = "https://n01g0o3sug.execute-api.eu-north-1.amazonaws.com/dev/";
+const LAMBDA_BASE_URL = "https://h5hjkdsee4.execute-api.eu-north-1.amazonaws.com/test/";
+const busdLiveContractAddress = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
+const busdTestNetContractAddress = "0x3681a42E747794D110a1F1Dad66D3cbac8653422";
+
+const showAlert = (errotType, errorMsg, timer = 1500) => { Swal.fire({ icon: errotType, title: errorMsg, position: 'center', showConfirmButton: false, timer: timer, showClass: { popup: 'animate__animated animate__fadeInDown' }, hideClass: { popup: 'animate__animated animate__fadeOutUp' } }) }
 const currentChainId = async () => { return await provider.request({ method: "eth_chainId" }) }
 const ethHexValue = (value) => { return ethers.utils.hexValue(parseInt(value)) }
 const copyToolout = () => { document.getElementById("myTooltip").innerHTML = "Copy to clipboard"; }
@@ -11,20 +16,21 @@ const isMobile = () => { let i = !1; return !function (e) { (/(android|bb\d+|mee
 const copyToolText = () => {
     let walletAddress = getCookie("minigameWalletAddress");
     var tooltip = document.getElementById("myTooltip");
-        tooltip.innerHTML = `Copied: ${walletAddress.slice(0, 8)}...${walletAddress.slice(33)}`;
+    tooltip.innerHTML = `Copied: ${walletAddress.slice(0, 8)}...${walletAddress.slice(33)}`;
     navigator.clipboard.writeText(walletAddress);
 }
 
 const ajaxCall = async (appUrl, params, method, token) => {
-    return await $.ajax({ url: appUrl, type: method, data: params, dataType: "json", async: true, headers: { 'Authorization': token }, error: async (error) => { console.log(error); } });
+    // return await $.ajax({ url: appUrl, type: method, data: params, dataType: "json", async: true, headers: { 'Authorization': token }, error: async (error) => { console.log(error); } });
+    return await $.ajax({ url: appUrl, type: method, data: params, dataType: "json", async: true, headers: { 'Authorization': token } });
 }
 
 const callHttpRequest = async (appUrl, params, method, token) => {
     let reponse = await ajaxCall(appUrl, params, method, token);
-    if(typeof reponse.isInvalidToken == "undefined"){
+    if (typeof reponse.isInvalidToken == "undefined") {
         return reponse;
     }
-    else{
+    else {
         showAlert("info", "Session Timeout, Please Login.");
         setTimeout(function () {
             $(".login_btn").removeClass("d-none");
@@ -42,10 +48,10 @@ const ajaxCallImg = async (appUrl, params, method, token) => {
 
 const callHttpRequestImg = async (appUrl, params, method, token) => {
     let reponse = await ajaxCallImg(appUrl, params, method, token);
-    if(typeof reponse.isInvalidToken == "undefined"){
+    if (typeof reponse.isInvalidToken == "undefined") {
         return reponse;
     }
-    else{
+    else {
         showAlert("info", "Session Timeout, Please Login.");
         setTimeout(function () {
             $(".login_btn").removeClass("d-none");
@@ -58,14 +64,14 @@ const callHttpRequestImg = async (appUrl, params, method, token) => {
 }
 
 const switchNetwork = async () => {
-    provider = await detectEthereumProvider();    
+    provider = await detectEthereumProvider();
     if (provider) {
         let appUrl = `${API_BASE_URL}setting/view`;
         let response = await callHttpRequest(appUrl, [], "GET", "");
         let networkMode = response.data.blockchainNetworkMode;
         let networkUrls = response.data.blockchain[0].networkUrl;
-        let blockchain_setting = $.grep(networkUrls, function(network) { return network.type == networkMode });
-            blockchain_setting = blockchain_setting[0];
+        let blockchain_setting = $.grep(networkUrls, function (network) { return network.type == networkMode });
+        blockchain_setting = blockchain_setting[0];
         let currentChainID = await currentChainId();
         let deployChainID = ethHexValue(blockchain_setting.chainId);
         if (deployChainID !== currentChainID)
@@ -195,15 +201,15 @@ $(document).on("click", "#connect", async function () {
 });
 
 checkBalance = async (account) => {
-    if(typeof account != "undefined"){
+    if (typeof account != "undefined") {
         let appUrl = `${API_BASE_URL}setting/view`;
         let response = await callHttpRequest(appUrl, [], "GET", "");
         let networkMode = response.data.blockchainNetworkMode;
         let networkUrls = response.data.blockchain[0].networkUrl;
-        let filteredUrl = $.grep(networkUrls, function(network) { return network.type == networkMode });
+        let filteredUrl = $.grep(networkUrls, function (network) { return network.type == networkMode });
         const web3 = new Web3(new Web3.providers.HttpProvider(filteredUrl[0].url));
         // var balance = parseFloat(web3.utils.fromWei( await web3.eth.getBalance(account) )).toFixed(4);
-        var balance = parseFloat(web3.utils.fromWei( await web3.eth.getBalance(account) ));
+        var balance = parseFloat(web3.utils.fromWei(await web3.eth.getBalance(account)));
         // console.log(balance);
         setCookie("minigameWalletBalance", balance.toString(), 365);
         $('.comon-token span.theme-text').html(`${balance}`);
@@ -214,13 +220,13 @@ $(document).on('submit', '#loginForm', async function (event) {
     event.preventDefault();
     let btn = $(this).find(':submit');
     let prevText = btn.text();
-        btn.text("Please Wait...");
+    btn.text("Please Wait...");
     let data = $(this).serialize();
     let appUrl = `${API_BASE_URL}user/login`;
     let response = await callHttpRequest(appUrl, data, "POST", "");
     if (response.status === 'success') {
-        setCookie('userLogin', response.data.Token, 365),location.replace(APP_URL);
-        setCookie('userInfo', JSON.stringify({ "_id" : response.data._id, "email" : response.data.email }), 365),location.replace(APP_URL);
+        setCookie('userLogin', response.data.Token, 365), location.replace(APP_URL);
+        setCookie('userInfo', JSON.stringify({ "_id": response.data._id, "email": response.data.email }), 365), location.replace(APP_URL);
     }
     else {
         let message = response.message.replace("_", " ").toLocaleLowerCase().charAt(0).toUpperCase() + response.message.replace("_", " ").toLocaleLowerCase().slice(1);
@@ -232,7 +238,7 @@ $(document).on('submit', '#loginForm', async function (event) {
 $(document).on('submit', '#forgot_password', async function (event) {
     event.preventDefault();
     let email = $("#forgot_password #forgot-email").val();
-    let data = {"email" : email, "type" : "forgotPassword"};
+    let data = { "email": email, "type": "forgotPassword" };
     let appUrl = `${API_BASE_URL}user/sendEmailVerificationOtp`;
     let response = await callHttpRequest(appUrl, data, "POST", "");
     if (response.status === 'success') {
@@ -262,7 +268,7 @@ $(document).on('submit', '#forgot_password', async function (event) {
     }
 });
 
-$(document).on('submit','#reset_password', async function(e){
+$(document).on('submit', '#reset_password', async function (e) {
     e.preventDefault();
     let email = $("#reset_password input[name='email']").val();
     let password = $("#reset_password input[name='password']").val();
@@ -270,17 +276,17 @@ $(document).on('submit','#reset_password', async function(e){
     let verify_code = $("#reset_password input[name='verifyCode']").val();
     let otpEncryption = getCookie("encrypt");
     let decrypted = CryptoJS.AES.decrypt(otpEncryption, email).toString(CryptoJS.enc.Utf8);
-    if(password != repeat_password){
+    if (password != repeat_password) {
         showAlert("error", "Please enter same password");
     }
-    else if(decrypted != verify_code){
+    else if (decrypted != verify_code) {
         showAlert("error", "OTP not match");
     }
-    else{
+    else {
         let appUrl = `${API_BASE_URL}user/newPassword`;
-        let params = { "email" : email, "password" : password, "verify_code" : verify_code };
+        let params = { "email": email, "password": password, "verify_code": verify_code };
         let response = await callHttpRequest(appUrl, params, "POST", "");
-        if(response.status === 'success') {
+        if (response.status === 'success') {
             showAlert("success", response.message);
             setTimeout(function () { location.replace(APP_URL + '/login'); }, 2000);
         } else {
@@ -323,12 +329,12 @@ $(document).on('click', '[data-action="update_profile"]', async function (event)
     event.preventDefault();
     let btn = $(this);
     let prevText = btn.text();
-        btn.text("Please Wait...");
+    btn.text("Please Wait...");
     let data = {};
     let username = $("#profile_form #user_name").val();
-        data.username = username;
+    data.username = username;
     let profileImage = $("#profile_form #profileImage").val();
-    if(profileImage != "")
+    if (profileImage != "")
         data.profileImage = profileImage;
     let userAuth = getCookie("userLogin");
     let appUrl = `${API_BASE_URL}user/updateProfile`;
@@ -345,7 +351,7 @@ $(document).on('click', '[data-action="update_profile"]', async function (event)
 });
 
 $(document).on("click", "[data-action='remove-img']", async function (event) {
-    event.preventDefault();    
+    event.preventDefault();
     let userAuth = getCookie("userLogin");
     let profileImage = $("#profile_form #profileImage").val();
     let data = { "profileImage": profileImage };
@@ -407,7 +413,7 @@ $(document).on("click", 'ul#pagination li a', async function (e) {
     $('html, body').animate({ scrollTop: $("#inventoryListing").offset().top }, 1000);
 });
 
-$(document).on('submit','#registerForm', async function(e){
+$(document).on('submit', '#registerForm', async function (e) {
     e.preventDefault();
     let email = $("#registerForm input[name='email']").val();
     let username = $("#registerForm input[name='username']").val();
@@ -417,17 +423,17 @@ $(document).on('submit','#registerForm', async function(e){
     let promo_code = $("#registerForm input[name='promo_code']").val();
     let otpEncryption = getCookie("encrypt");
     let decrypted = CryptoJS.AES.decrypt(otpEncryption, email).toString(CryptoJS.enc.Utf8);
-    if(password != repeat_password){
+    if (password != repeat_password) {
         showAlert("error", "Please enter same password");
     }
-    else if(decrypted != verify_code){
+    else if (decrypted != verify_code) {
         showAlert("error", "OTP not match");
     }
-    else{
+    else {
         let appUrl = `${API_BASE_URL}user/register`;
-        let params = { "email" : email, "username" : username, "password" : password, "promoCode" : promo_code };
+        let params = { "email": email, "username": username, "password": password, "promoCode": promo_code };
         let response = await callHttpRequest(appUrl, params, "POST", "");
-        if(response.status === 'success') {
+        if (response.status === 'success') {
             showAlert("success", response.message);
             setTimeout(function () { location.replace(APP_URL + '/login'); }, 2000);
         } else {
@@ -437,44 +443,44 @@ $(document).on('submit','#registerForm', async function(e){
     }
 });
 
-$(document).on('click','#verification-code', async function(e){
+$(document).on('click', '#verification-code', async function (e) {
     e.preventDefault();
     let appUrl = `${API_BASE_URL}user/sendEmailVerificationOtp`;
     let email = "";
-    if($("#change-password #email").length > 0)
+    if ($("#change-password #email").length > 0)
         email = $("#change-password #email").val();
     else
         email = $("#registerForm #email").val();
-    let params = {'email': email};
+    let params = { 'email': email };
     let text = $('#verification-code').html();
-    if(text == "Get"){
+    if (text == "Get") {
         let response = await callHttpRequest(appUrl, params, "POST", "");
-        if(response.status === 'success') {
+        if (response.status === 'success') {
             let counter = 60;
-            let message = response.message.replace(/\b\w/g, function(match) { return match.toUpperCase(); });
+            let message = response.message.replace(/\b\w/g, function (match) { return match.toUpperCase(); });
             $(this).after(`<p class="code-msg text-white text-center">The code was successfully sent</p>`);
             showAlert("success", message);
             setCookie('encrypt', response.data, 365);
-            let interval = setInterval(function() {
+            let interval = setInterval(function () {
                 counter--;
                 if (counter <= 0) {
-                    clearInterval(interval),$('#verification-code').html("Get"),$(".code-msg").remove();
+                    clearInterval(interval), $('#verification-code').html("Get"), $(".code-msg").remove();
                     counter = 60;
                     return;
                 }
-                else{
-                    $('#verification-code').text(`${counter}s`);            
+                else {
+                    $('#verification-code').text(`${counter}s`);
                 }
             }, 1000);
         }
-        else{
+        else {
             let message = response.message.replace("_", " ").toLocaleLowerCase().charAt(0).toUpperCase() + response.message.replace("_", " ").toLocaleLowerCase().slice(1);
             showAlert("error", message);
         }
     }
 });
 
-$(document).on('submit','#change-password', async function(e){
+$(document).on('submit', '#change-password', async function (e) {
     e.preventDefault();
     let email = $("#change-password input[name='email']").val();
     let oldPassword = $("#change-password input[name='oldPassword']").val();
@@ -485,18 +491,18 @@ $(document).on('submit','#change-password', async function(e){
     let decrypted = CryptoJS.AES.decrypt(otpEncryption, email).toString(CryptoJS.enc.Utf8);
     let btn = $(this).find(':submit');
     let prevText = btn.text();
-        btn.text("Please Wait...");
-    if(password != repeat_password){
+    btn.text("Please Wait...");
+    if (password != repeat_password) {
         showAlert("error", "Please enter same password");
     }
-    else if(decrypted != verify_code){
+    else if (decrypted != verify_code) {
         showAlert("error", "OTP not match");
     }
-    else{
+    else {
         let appUrl = `${API_BASE_URL}user/newPassword`;
-        let params = { "email" : email,"oldPassword" : oldPassword, "password" : password, "verify_code" : verify_code };
+        let params = { "email": email, "oldPassword": oldPassword, "password": password, "verify_code": verify_code };
         let response = await callHttpRequest(appUrl, params, "POST", "");
-        if(response.status === 'success') {
+        if (response.status === 'success') {
             showAlert("success", response.message);
             setTimeout(function () { location.replace(APP_URL + '/profile'); }, 2000);
         } else {
@@ -508,25 +514,25 @@ $(document).on('submit','#change-password', async function(e){
 });
 
 const timerIncrement = () => {
-    idleTimerCheck = 59,idleTimer++;
-    if(idleTimer > idleTimerCheck){
+    idleTimerCheck = 59, idleTimer++;
+    if (idleTimer > idleTimerCheck) {
         Swal.fire({ title: "In-Activity!", text: "Session Timeout.", icon: 'info', confirmButtonText: 'Ok', allowOutsideClick: false })
-        .then((result) => {
-            if (result.isConfirmed) {
-                $(".login_btn").removeClass("d-none"),$(".user_profile_dd, .wallet_connect").addClass("d-none");
-                deleteCookie('minigameWalletAddress'), deleteCookie('minigameWalletBalance'), deleteCookie('userLogin'), deleteCookie('userInfo'), location.replace(APP_URL);
-                location.replace(APP_URL + '/login');
-            }
-        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    $(".login_btn").removeClass("d-none"), $(".user_profile_dd, .wallet_connect").addClass("d-none");
+                    deleteCookie('minigameWalletAddress'), deleteCookie('minigameWalletBalance'), deleteCookie('userLogin'), deleteCookie('userInfo'), location.replace(APP_URL);
+                    location.replace(APP_URL + '/login');
+                }
+            })
     }
 }
 
 let idleTimer = 0;
 $(document).ready(async function () {
     let userAuth = getCookie("userLogin");
-    if(userAuth && userAuth !== null){
+    if (userAuth && userAuth !== null) {
         let walletAddress = getCookie("minigameWalletAddress");
-        if(walletAddress)
+        if (walletAddress)
             await switchNetwork();
         await checkBalance(walletAddress);
         let walletBalance = getCookie("minigameWalletBalance");
@@ -559,7 +565,7 @@ $(document).ready(async function () {
                 $("#change-password #email").val(response.data.email);
             }
             $(".user_profile_email").text(`${response.data.email?.slice(0, 18)}...`);
-            if($(".user_profile_email_profile").length > 0)
+            if ($(".user_profile_email_profile").length > 0)
                 $(".user_profile_email_profile").text(response.data.email);
             $(".login_btn").addClass("d-none");
             $(".user_profile_dd").removeClass('d-none');
@@ -591,7 +597,7 @@ if (popup !== null && !getCookie('cookiePreferencesSet')) {
     popup.style.display = 'block';
 }
 if (saveBtn !== null) {
-    saveBtn.addEventListener('click', function() {
+    saveBtn.addEventListener('click', function () {
         var performanceConsent = document.getElementById('performance-cookies').checked;
         var functionalityConsent = document.getElementById('functionality-cookies').checked;
         var advertisingConsent = document.getElementById('advertising-cookies').checked;
@@ -623,5 +629,293 @@ const getCookie = (name) => {
 }
 
 const deleteCookie = (name) => {
-    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+// Crystals Withdraw Flow
+const getCrystalSettings = async (user_id) => {
+    let token = getCookie("userLogin");
+    let appUrl = `${API_BASE_URL}setting/view`;
+    let response = await callHttpRequest(appUrl, [], "GET", token);
+
+    appUrl = `${LAMBDA_BASE_URL}get-balance`;
+    let params = { "user_id": user_id };
+    let balance = await callHttpRequest(appUrl, JSON.stringify(params), "POST", token);
+
+    return {
+        "crystalConversionRate": response.data.minigameSetting.crystalConversionRate,
+        "crystalCommission": response.data.minigameSetting.crystalCommission,
+        "adminWalletAddress": response.data.minigameSetting.adminWalletAddress,
+        "userBalance": balance.data.amount
+    };
+}
+
+const createWithdrawRequest = async (crystalAmount, user_id) => {
+    let token = getCookie("userLogin");
+    let params = { "crystalAmount": crystalAmount, "user_id": user_id };
+    let appUrl = `${LAMBDA_BASE_URL}withdraw-create`;
+    // console.log(response);
+    return await callHttpRequest(appUrl, JSON.stringify(params), "POST", token);
+}
+
+const getWithdrawHistory = async (page, limit, user_id) => {
+    $("#withdraw_history tbody").html(`<tr><td colspan="6" class="text-center"><div class="spinner-border" role="status"><span class="sr-only"></span></div></td></tr>`);
+    let token = getCookie("userLogin");
+    let params = { "page": page, "limit": limit, "user_id": user_id };
+    let appUrl = `${LAMBDA_BASE_URL}withdraw-list`;
+    let response = await callHttpRequest(appUrl, JSON.stringify(params), "POST", token);
+    // console.log(response);
+    let history = "";
+    if (response.status == "success") {
+        let records = response.data;
+        if (records.length > 0) {
+            records.forEach(function (record, index) {
+                // console.log(record);
+                let date = new Date(record.date_created_utc);
+                history += `<tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="table_dimond">
+                                <img src="${APP_URL}/assets/images/diamond.png" class="img-fluid" />
+                            </div>${record.crystalAmount}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="table_dimond">
+                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                            </div>${record.busdAmount}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="table_dimond">
+                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                            </div>${record.fee}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="table_dimond">
+                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                            </div>${record.receivableAmount}
+                        </div>
+                    </td>
+                    <td class="mobile_address_td">
+                        <p class="mobile_address">${record.walletAddress}</p>
+                    </td>
+                    <td class="desktop_adrees">
+                        <p class="buy_his_add">${record.walletAddress}</p>
+                    </td>
+                    <td class='text-uppercase'>${date.toLocaleString()}</td>
+                    <td>
+                        <button class="btn_history_show">
+                            <span class="text-capitalize his-${record.status == "pending" ? 'rejected' : 'confirmed'}">${record.status}</span>
+                        </button>
+                    </td>
+                </tr>`;
+            });
+        }
+        else {
+            history += `<tr><td class="text-center" colspan="6">No History Found</td></tr>`;
+        }
+    }
+    $("#withdraw_history tbody").html(history);
+}
+
+// Crystals Buy Flow
+const getCrystalListings = async (page, limit) => {
+    let token = getCookie("userLogin");
+    let appUrl = `${LAMBDA_BASE_URL}package-list`;
+    let params = { "page": page, "limit": limit };
+    let response = await callHttpRequest(appUrl, JSON.stringify(params), "POST", token);
+    // console.log(response);
+    let listing = "";
+    if (response.status == "success") {
+        let records = response.data;
+        if (records.length > 0) {
+            records.forEach(function (record, index) {
+                listing += `<li>
+                    <div class='buy_card_wrap'>
+                        <div class='buy_cardimgwrap'>
+                            <div class='imgcard-wrap'>
+                                <img src='${record.image}' alt='${record._id}' class='img-fluid' />
+                            </div>
+                            <div class='crystal_wrap d-flex align-items-center justify-content-center gap-2'>
+                                <div class='buy_diamond'>
+                                    <img src='${APP_URL}/assets/images/diamond.png' alt='${record._id}' class='img-fluid' />
+                                </div>
+                                <p class='crystals_items'>${record.crystalAmount}</p>
+                            </div>
+                        </div>
+                        <div class='buy_btns_twos d-flex align-items-center justify-content-center gap-2 mt-3'>
+                            <button class='btn_green'>
+                                <div class='btn_icon me-2'>
+                                    <img src='${APP_URL}/assets/images/bnb_icon.png' alt='${record._id}' class='img-fluid' />
+                                </div>
+                                ${record.busdAmount}
+                            </button>
+                            <button type='button' data-bs-toggle='modal' data-bs-target='#buyConfirmation' class='btn_blue'
+                            data-p-id='${record._id}' data-p-busd='${record.busdAmount}' data-p-camt='${record.crystalAmount}'>Buy</button>
+                        </div>
+                    </div>
+                </li>`;
+            });
+        }
+        else {
+            listing += `<li>No Items Found</li>`;
+        }
+    }
+    else {
+        listing += `<li>No Items Found</li>`;
+    }
+    
+    $("#buy-crystal-listing").html(listing);
+    
+}
+
+const getBuyPackageHistory = async (page, limit, user_id) => {
+    $("#buy_history tbody").html(`<tr><td colspan="6" class="text-center"><div class="spinner-border" role="status"><span class="sr-only"></span></div></td></tr>`);
+    let token = getCookie("userLogin");
+    let params = { "page": page, "limit": limit, "user_id": user_id };
+    let appUrl = `${LAMBDA_BASE_URL}package-purchase-history`;
+    let response = await callHttpRequest(appUrl, JSON.stringify(params), "POST", token);
+    // console.log(response);
+    let history = "";
+    if (response.status == "success") {
+        let records = response.data;
+        if (records.length > 0) {
+            records.forEach(function (record, index) {
+                // console.log(record);
+                let date = new Date(record.date_created_utc);
+                history += `<tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="table_dimond">
+                                <img src="${APP_URL}/assets/images/diamond.png" class="img-fluid" />
+                            </div>${record.crystalAmount}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="table_dimond">
+                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                            </div>${record.busdAmount}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="table_dimond">
+                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                            </div>${record.adminCommission}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="table_dimond">
+                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                            </div>${record.totalPaid}
+                        </div>
+                    </td>
+                    <td class="mobile_address_td">
+                        <p class="mobile_address">${record.walletAddress}</p>
+                    </td>
+                    <td class="desktop_adrees">
+                        <p class="buy_his_add">${record.walletAddress}</p>
+                    </td>           
+                    <td class='text-uppercase'>${date.toLocaleString()}</td>
+                    <td>
+                        <button class="btn_history_show">
+                            <span class="text-capitalize his-confirmed">${record.status}</span>
+                        </button>
+                    </td>
+                </tr>`;
+            });
+        }
+        else {
+            history += `<tr><td class="text-center" colspan="6">No History Found</td></tr>`;
+        }
+    }
+    $("#buy_history tbody").html(history);
+}
+
+// eth Parse Units
+const ethParseUnits = (value) => {
+    if (typeof value != "undefined")
+        return ethers.utils.parseUnits(value.toString()).toString()
+}
+// eth Hex Value
+const WeitoEthValue = (value) => { return ethers.utils.formatEther(value) }
+
+const buyCrystalPackage = async (userId, p_id, amount, adminCommission, walletAddress) => {
+    let prevText  = $(".confirm-buy-confirm").text();
+    $(".confirm-buy-cancel, .confirm-buy-confirm").attr('disabled',true);
+    $(".confirm-buy-confirm").text("Please Wait");
+    try {
+        await switchNetwork();
+        let settings = await getCrystalSettings(userId);
+        let adminWalletAddress = settings.adminWalletAddress;
+        let appUrl = `${API_BASE_URL}setting/view`;
+        let response = await callHttpRequest(appUrl, [], "GET", "");
+        let networkMode = response.data.blockchainNetworkMode;
+        let busdabi = await callHttpRequest(`assets/js/abi.json`, '', "GET", '');
+
+        let provider = new ethers.providers.Web3Provider(window.ethereum);
+        let signer = await provider.getSigner(walletAddress);
+
+        let contract = await new ethers.Contract(networkMode == "testnet" ? busdTestNetContractAddress : busdLiveContractAddress, busdabi, signer);
+        let isConformed = await contract.increaseAllowance(walletAddress, ethParseUnits(amount));
+        let isConformedreceipt = await isConformed.wait();
+        
+        if (isConformedreceipt.status == 1) {
+            const transaction = await contract.transferFrom( walletAddress, adminWalletAddress, ethParseUnits(amount), { gasLimit: "3000000" });
+            const receipt = await transaction.wait();
+            // console.log(receipt);
+            // Save Response to API
+            let settings = await getCrystalSettings(userId);
+            let token = getCookie("userLogin");
+            let params = { "packageId": p_id, "walletAddress": walletAddress, "adminCommission": adminCommission, "transactionHash": receipt.transactionHash };
+            let appUrl = `${LAMBDA_BASE_URL}package-buy`;
+            let response = await callHttpRequest(appUrl, JSON.stringify(params), "POST", token);
+            // console.log(response);
+            if(response.status == "success"){
+                $("#buyConfirmation").modal("hide");
+                showAlert("success", response.message, 5000);
+                await getCrystalListings(1, 10);
+                await getBuyPackageHistory(1, 10, userId);
+            }
+            else{
+                showAlert("error", response.message, 5000);
+            }
+        }
+        else {
+            showAlert("error", "increaseAllowance failed", 5000);
+        }
+    }
+    catch (error){
+        if(error?.code == "ACTION_REJECTED")
+            showAlert("error", "Transaction has been rejected", 5000);
+        else
+            // console.log("error", error)
+            showAlert("error", error.message, 5000);
+    }
+    $(".confirm-buy-confirm").text(prevText);
+    $(".confirm-buy-cancel, .confirm-buy-confirm").attr('disabled',false);
+}
+
+const validateNumber = (evt) => {
+    var theEvent = evt || window.event;    
+    if (theEvent.type === 'paste') {
+        key = event.clipboardData.getData('text/plain');
+    }
+    else {
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+        theEvent.returnValue = false;
+        if (theEvent.preventDefault)
+            theEvent.preventDefault();
+    }
 }
