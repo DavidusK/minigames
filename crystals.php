@@ -43,7 +43,7 @@
                                     <div class="withdrawinput_wrap position-relative">
                                         <input type="text" name="crystal_gusd" id="crystal_gusd" readonly placeholder="0" autocomplete="off">
                                         <div class="amont_icon">
-                                            <img src="<?= @APP_URL ?>/assets/images/bnb_icon.png" class="img-fluid" />
+                                            <img src="<?= @APP_URL ?>/assets/images/busd_icon.png" class="img-fluid" />
                                         </div>
                                     </div>
                                     <div class="min_max d-flex align-items-center gap-4 mt-2">
@@ -138,7 +138,7 @@
                                         </span>
                                         <span class="color_diff">=</span><span class="color_diff d-flex align-items-center gap-1">
                                             <div class="img_span">
-                                                <img src="<?=@APP_URL?>/assets/images/bnb_icon.png" class="img-fluid">
+                                                <img src="<?=@APP_URL?>/assets/images/busd_icon.png" class="img-fluid">
                                             </div>
                                             <span class="withdraw_busd_confirm"></span>
                                         </span>
@@ -151,7 +151,7 @@
                                     <p>Total:</p>
                                     <span class="color_diff d-flex align-items-center gap-1">
                                         <div class="img_span">
-                                            <img src="<?=@APP_URL?>/assets/images/bnb_icon.png" class="img-fluid">
+                                            <img src="<?=@APP_URL?>/assets/images/busd_icon.png" class="img-fluid">
                                         </div>
                                         <span class="withdraw_balance_busd_confirm"></span>
                                     </span>
@@ -194,7 +194,7 @@
                                         <span class="color_diff">=</span>
                                         <span class="color_diff d-flex align-items-center gap-1">
                                             <div class="img_span">
-                                                <img src="<?=@APP_URL?>/assets/images/bnb_icon.png" class="img-fluid">
+                                                <img src="<?=@APP_URL?>/assets/images/busd_icon.png" class="img-fluid">
                                             </div>
                                             <span class="buy_busd"></span> BUSD
                                         </span>
@@ -207,7 +207,7 @@
                                     <p>You Get:</p>
                                     <span class="color_diff d-flex align-items-center gap-1">
                                         <div class="img_span">
-                                            <img src="<?=@APP_URL?>/assets/images/bnb_icon.png" class="img-fluid">
+                                            <img src="<?=@APP_URL?>/assets/images/busd_icon.png" class="img-fluid">
                                         </div>
                                         <span class="buy_final_busd"></span> BUSD
                                     </span>

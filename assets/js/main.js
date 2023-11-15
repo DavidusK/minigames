@@ -699,28 +699,28 @@ const getWithdrawHistory = async (page, limit, user_id) => {
                 // <td>
                 //     <div class="d-flex align-items-center gap-2">
                 //         <div class="table_dimond">
-                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //             <img src="${APP_URL}/assets/images/busd_icon.png" class="img-fluid" />
                 //         </div>${parseFloat(record.busdAmount) - parseFloat(record.fee)}
                 //     </div>
                 // </td>
                 // <td>
                 //     <div class="d-flex align-items-center gap-2">
                 //         <div class="table_dimond">
-                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //             <img src="${APP_URL}/assets/images/busd_icon.png" class="img-fluid" />
                 //         </div>${record.busdAmount}
                 //     </div>
                 // </td>
                 // <td>
                 //     <div class="d-flex align-items-center gap-2">
                 //         <div class="table_dimond">
-                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //             <img src="${APP_URL}/assets/images/busd_icon.png" class="img-fluid" />
                 //         </div>${record.fee}
                 //     </div>
                 // </td>
                 // <td>
                 //     <div class="d-flex align-items-center gap-2">
                 //         <div class="table_dimond">
-                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //             <img src="${APP_URL}/assets/images/busd_icon.png" class="img-fluid" />
                 //         </div>${record.receivableAmount}
                 //     </div>
                 // </td>
@@ -761,7 +761,7 @@ const getCrystalListings = async (page, limit) => {
                         <div class='buy_btns_twos d-flex align-items-center justify-content-center gap-2 mt-3'>
                             <button class='btn_green'>
                                 <div class='btn_icon me-2'>
-                                    <img src='${APP_URL}/assets/images/bnb_icon.png' alt='${record._id}' class='img-fluid' />
+                                    <img src='${APP_URL}/assets/images/busd_icon.png' alt='${record._id}' class='img-fluid' />
                                 </div>
                                 ${record.busdAmount}
                             </button>
@@ -817,7 +817,7 @@ const getBuyPackageHistory = async (page, limit, user_id) => {
                     <td>
                         <div class="d-flex align-items-center gap-2">
                             <div class="table_dimond">
-                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                                <img src="${APP_URL}/assets/images/busd_icon.png" class="img-fluid" />
                             </div>${parseFloat(record.busdAmount) + parseFloat(record.adminCommission)}
                         </div>
                     </td>           
@@ -832,14 +832,14 @@ const getBuyPackageHistory = async (page, limit, user_id) => {
                 // <td>
                 //     <div class="d-flex align-items-center gap-2">
                 //         <div class="table_dimond">
-                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //             <img src="${APP_URL}/assets/images/busd_icon.png" class="img-fluid" />
                 //         </div>${record.adminCommission}
                 //     </div>
                 // </td>
                 // <td>
                 //     <div class="d-flex align-items-center gap-2">
                 //         <div class="table_dimond">
-                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //             <img src="${APP_URL}/assets/images/busd_icon.png" class="img-fluid" />
                 //         </div>${record.totalPaid}
                 //     </div>
                 // </td>
