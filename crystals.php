@@ -15,7 +15,7 @@
                 <div class="tab-content">
                     <div class="tab-pane container active" id="withdraw">
                         <div class="Withdraw_tab">
-                            <div class="balance_box lg-my-5 my-4">
+                            <div class="balance_box lg-my-5 my-4 pt-1">
                                 <h6>Balance</h6>
                                 <h5>
                                     <div class="diamond_img">
@@ -56,10 +56,6 @@
                                     <div class="dimaond_wrap d-flex justify-content-center">
                                         <div class="sm-dimanod">
                                             <img src="<?= @APP_URL ?>/assets/images/diamond.png" class="img-fluid" />
-                                        </div>
-                                        <p>1 = </p>
-                                        <div class="sm-dimanod">
-                                            <img src="<?= @APP_URL ?>/assets/images/bnb_icon.png" class="img-fluid" />
                                         </div>
                                         <p class="commm_rate"><div class="spinner-border" role="status"><span class="sr-only"></span></div></p>
                                     </div>
@@ -256,7 +252,7 @@
             Adm_Co = settings.crystalConversionRate; // Admin ConversionRate
             Adm_Fe = settings.crystalCommission; // Admin Fee
             Adm_Ad = settings.adminWalletAddress; // Admin Address
-            $(".commm_rate").html(settings.crystalConversionRate);
+            $(".commm_rate").html(`1=${settings.crystalConversionRate}$`);
             $(".commm_rate").next('div.spinner-border').remove();
             $(".crystal-balance").html(settings.userBalance);
             $(".fee_admin").html(`${Adm_Fe}%`)

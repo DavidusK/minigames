@@ -14,7 +14,12 @@ button.btn_widraw:disabled {
 .common_padding_main {
     padding: 170px 0 20px;
 }
-
+.withdra_form label, .balance_box h6 {
+	font-size: 16px;
+	letter-spacing: .72px;
+	line-height: 159.5%;
+	opacity: .5;
+}
 ul.withdrw_frame {
     border-radius: 12px;
     background: linear-gradient(180deg, #2b7079 0%, #222740 100%);

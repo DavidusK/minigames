@@ -671,7 +671,9 @@ const getWithdrawHistory = async (page, limit, user_id) => {
         if (records.length > 0) {
             records.forEach(function (record, index) {
                 // console.log(record);
-                let date = new Date(record.date_created_utc);
+                let dateTime = new Date(record.date_created_utc);
+                let date = dateTime.toLocaleString().split(",")[0].trim();
+                let time = dateTime.toLocaleString().split(",")[1].trim();
                 history += `<tr>
                     <td>
                         <div class="d-flex align-items-center gap-2">
@@ -680,40 +682,48 @@ const getWithdrawHistory = async (page, limit, user_id) => {
                             </div>${record.crystalAmount}
                         </div>
                     </td>
-                    <td>
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="table_dimond">
-                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
-                            </div>${record.busdAmount}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="table_dimond">
-                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
-                            </div>${record.fee}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="table_dimond">
-                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
-                            </div>${record.receivableAmount}
-                        </div>
-                    </td>
                     <td class="mobile_address_td">
                         <p class="mobile_address">${record.walletAddress}</p>
                     </td>
                     <td class="desktop_adrees">
                         <p class="buy_his_add">${record.walletAddress}</p>
                     </td>
-                    <td class='text-uppercase'>${date.toLocaleString()}</td>
+                    <td class='text-uppercase'>${date}</td>
+                    <td class='text-uppercase'>${time}</td>
                     <td>
                         <button class="btn_history_show">
                             <span class="text-capitalize his-${record.status == "pending" ? 'rejected' : 'confirmed'}">${record.status}</span>
                         </button>
                     </td>
                 </tr>`;
+                // <td>
+                //     <div class="d-flex align-items-center gap-2">
+                //         <div class="table_dimond">
+                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //         </div>${parseFloat(record.busdAmount) - parseFloat(record.fee)}
+                //     </div>
+                // </td>
+                // <td>
+                //     <div class="d-flex align-items-center gap-2">
+                //         <div class="table_dimond">
+                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //         </div>${record.busdAmount}
+                //     </div>
+                // </td>
+                // <td>
+                //     <div class="d-flex align-items-center gap-2">
+                //         <div class="table_dimond">
+                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //         </div>${record.fee}
+                //     </div>
+                // </td>
+                // <td>
+                //     <div class="d-flex align-items-center gap-2">
+                //         <div class="table_dimond">
+                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //         </div>${record.receivableAmount}
+                //     </div>
+                // </td>
             });
         }
         else {
@@ -727,7 +737,7 @@ const getWithdrawHistory = async (page, limit, user_id) => {
 const getCrystalListings = async (page, limit) => {
     let token = getCookie("userLogin");
     let appUrl = `${LAMBDA_BASE_URL}package-list`;
-    let params = { "page": page, "limit": limit };
+    let params = { "page": page, "limit": limit, "order": 1 };
     let response = await callHttpRequest(appUrl, JSON.stringify(params), "POST", token);
     // console.log(response);
     let listing = "";
@@ -745,7 +755,7 @@ const getCrystalListings = async (page, limit) => {
                                 <div class='buy_diamond'>
                                     <img src='${APP_URL}/assets/images/diamond.png' alt='${record._id}' class='img-fluid' />
                                 </div>
-                                <p class='crystals_items'>${record.crystalAmount}</p>
+                                <p class='crystals_items'>${record.crystalAmount}$</p>
                             </div>
                         </div>
                         <div class='buy_btns_twos d-flex align-items-center justify-content-center gap-2 mt-3'>
@@ -787,7 +797,9 @@ const getBuyPackageHistory = async (page, limit, user_id) => {
         if (records.length > 0) {
             records.forEach(function (record, index) {
                 // console.log(record);
-                let date = new Date(record.date_created_utc);
+                let dateTime = new Date(record.date_created_utc);
+                let date = dateTime.toLocaleString().split(",")[0].trim();
+                let time = dateTime.toLocaleString().split(",")[1].trim();
                 history += `<tr>
                     <td>
                         <div class="d-flex align-items-center gap-2">
@@ -796,40 +808,41 @@ const getBuyPackageHistory = async (page, limit, user_id) => {
                             </div>${record.crystalAmount}
                         </div>
                     </td>
-                    <td>
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="table_dimond">
-                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
-                            </div>${record.busdAmount}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="table_dimond">
-                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
-                            </div>${record.adminCommission}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="table_dimond">
-                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
-                            </div>${record.totalPaid}
-                        </div>
-                    </td>
                     <td class="mobile_address_td">
                         <p class="mobile_address">${record.walletAddress}</p>
                     </td>
                     <td class="desktop_adrees">
                         <p class="buy_his_add">${record.walletAddress}</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="table_dimond">
+                                <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                            </div>${parseFloat(record.busdAmount) + parseFloat(record.adminCommission)}
+                        </div>
                     </td>           
-                    <td class='text-uppercase'>${date.toLocaleString()}</td>
+                    <td class='text-uppercase'>${date}</td>
+                    <td class='text-uppercase'>${time}</td>
                     <td>
                         <button class="btn_history_show">
                             <span class="text-capitalize his-confirmed">${record.status}</span>
                         </button>
                     </td>
                 </tr>`;
+                // <td>
+                //     <div class="d-flex align-items-center gap-2">
+                //         <div class="table_dimond">
+                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //         </div>${record.adminCommission}
+                //     </div>
+                // </td>
+                // <td>
+                //     <div class="d-flex align-items-center gap-2">
+                //         <div class="table_dimond">
+                //             <img src="${APP_URL}/assets/images/bnb_icon.png" class="img-fluid" />
+                //         </div>${record.totalPaid}
+                //     </div>
+                // </td>
             });
         }
         else {
