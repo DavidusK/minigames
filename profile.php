@@ -52,7 +52,7 @@
 								</div>
 							</div>
 							<div class="mb-4 mb-3">
-								<input name="user_name" id="user_name" placeholder="Name" required type="text" class="form-control">
+							<input name="user_name" disabled id="user_name" placeholder="Name" required type="text" class="form-control">
 							</div>
 							<div class="login-btn-wrap mt-5">
 								<button type="submit" data-action="update_profile" class="btn-form btn btn-secondary">Update</button>
