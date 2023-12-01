@@ -755,7 +755,7 @@ const getCrystalListings = async (page, limit) => {
                                 <div class='buy_diamond'>
                                     <img src='${APP_URL}/assets/images/diamond.png' alt='${record._id}' class='img-fluid' />
                                 </div>
-                                <p class='crystals_items'>${record.crystalAmount}$</p>
+                                <p class='crystals_items'>${record.crystalAmount}</p>
                             </div>
                         </div>
                         <div class='buy_btns_twos d-flex align-items-center justify-content-center gap-2 mt-3'>
@@ -763,7 +763,7 @@ const getCrystalListings = async (page, limit) => {
                                 <div class='btn_icon me-2'>
                                     <img src='${APP_URL}/assets/images/busd_icon.png' alt='${record._id}' class='img-fluid' />
                                 </div>
-                                ${record.busdAmount}
+                                ${record.busdAmount}$
                             </button>
                             <button type='button' data-bs-toggle='modal' data-bs-target='#buyConfirmation' class='btn_blue'
                             data-p-id='${record._id}' data-p-busd='${record.busdAmount}' data-p-camt='${record.crystalAmount}'>Buy</button>
