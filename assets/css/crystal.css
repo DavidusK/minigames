@@ -632,6 +632,85 @@ button.mod_cancelbtn {
 
 /* crystal */
 
+.parates_div_main {
+	background-position: 50% !important;
+	background-repeat: no-repeat !important;
+	background-size: 92% !important;
+	height: 100%;
+}
+img.img-fluid.level_bg {
+	cursor: pointer !important;
+	height: 100%;
+	object-fit: contain;
+	padding: 8px;
+	width: 100%;
+    min-height: 249px;
+}
+.parates_label {
+	align-items: center;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-radius: 100px;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	height: 50px;
+	justify-content: center;
+	left: 18px;
+	position: absolute;
+	top: 14px;
+	width: 50px;
+}
+.parates_label small {
+	font-size: 9px;
+	font-weight: 800;
+	line-height: 10px;
+}
+.parates_label h5 {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1;
+	margin: 0;
+}
+
+
+@media only screen and (max-width: 799px) {
+    .nft_nameidhere p {
+        font-size: 16px;
+    }
+    .parates_label {
+        height: 42px;
+        left: 19px;
+        top: 8px;
+        width: 42px;
+    }
+    .ship_list ul li {
+        width: 31%;
+    }
+    img.img-fluid.level_bg {
+        min-height: 286px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .ship_list ul li {
+        width: 30%;
+      }
+      .parates_label {
+        height: 35px;
+        left: 13px;
+        top: 8px;
+        width: 35px;
+    }
+    .nft_nameidhere p {
+        font-size: 12px;
+    }
+    img.img-fluid.level_bg {
+        min-height: 186px;
+    }
+}
+
 @media only screen and (max-width: 639px) {
     .cryto_name_top {
         margin: 30px auto;
@@ -696,6 +775,21 @@ button.mod_cancelbtn {
         border: none;
         margin: 0;
     }
+    .ship_list ul li {
+        width: 47%;
+    }
+    .parates_label {
+        height: 45px;
+        left: 18px;
+        top: 8px;
+        width: 45px;
+    }
+    img.img-fluid.level_bg {
+        min-height: 286px;
+    }
+    .nft_nameidhere {
+        top: 4px;
+    }
 }
 
 @media only screen and (max-width: 479px) {
@@ -708,5 +802,67 @@ button.mod_cancelbtn {
     ul.withdrw_frame {
         margin: 0 auto;
         width: 85% !important;
+    }
+    img.img-fluid.level_bg {
+	min-height: 246px;
+}
+}
+
+@media only screen and (max-width: 390px) {
+    .ship_list ul li {
+        width: 46%;
+    }
+    img.img-fluid.level_bg {
+        min-height: 226px;
+    }
+    .nft_nameidhere {
+        top: 2px;
+    }
+    .parates_label {
+        height: 40px;
+        left: 14px;
+        top: 8px;
+        width: 40px;
+    }
+}
+
+
+@media only screen and (max-width: 386px) {
+    .parates_label {
+        height: 37px;
+        left: 14px;
+        top: 8px;
+        width: 37px;
+    }
+    .parates_label h5 {
+        font-size: 13px;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 375px) {
+    img.img-fluid.level_bg {
+        min-height: 207px;
+    }
+   
+}
+
+@media only screen and (max-width: 359px) {
+    .parates_label {
+        height: 32px;
+        left: 10px;
+        top: 8px;
+        width: 32px;
+    }
+    .parates_label h5 {
+        font-size: 11px;
+    }
+    .parates_label small {
+        font-size: 8px; 
+    }
+    img.img-fluid.level_bg {
+        min-height: 186px;
     }
 }

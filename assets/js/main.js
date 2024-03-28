@@ -1,8 +1,8 @@
 let provider;
-const API_BASE_URL = "https://api.piratepets.io/api/v1/";
-// const API_BASE_URL = "https://api-dev.piratepets.io/api/v1/";
-const LAMBDA_BASE_URL = "https://n01g0o3sug.execute-api.eu-north-1.amazonaws.com/dev/";
-// const LAMBDA_BASE_URL = "https://h5hjkdsee4.execute-api.eu-north-1.amazonaws.com/test/";
+// const API_BASE_URL = "https://api.piratepets.io/api/v1/";
+const API_BASE_URL = "https://api-dev.piratepets.io/api/v1/";
+// const LAMBDA_BASE_URL = "https://n01g0o3sug.execute-api.eu-north-1.amazonaws.com/dev/";
+const LAMBDA_BASE_URL = "https://h5hjkdsee4.execute-api.eu-north-1.amazonaws.com/test/";
 const busdLiveContractAddress = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
 const busdTestNetContractAddress = "0x3681a42E747794D110a1F1Dad66D3cbac8653422";
 
@@ -63,6 +63,17 @@ const callHttpRequestImg = async (appUrl, params, method, token) => {
     }
 }
 
+
+
+const parseJwt = (token) => {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
 const switchNetwork = async () => {
     provider = await detectEthereumProvider();
     if (provider) {
@@ -110,6 +121,86 @@ const switchAccount = async (network) => {
     }
 }
 
+const levelImg = (item) => {
+	if (item?.category_id?.catName === "Ships") {
+		if (item.level < 10) {
+			return `${APP_URL}/assets/images/lvl1ships.png`;
+		}
+		else if (item.level >= 10 && item.level < 20) {
+			return `${APP_URL}/assets/images/lvl2ships.png`;
+		}
+		else if (item.level >= 20 && item.level < 30) {
+			return `${APP_URL}/assets/images/lvl3ships.png`;
+		}
+		else if (item.level >= 30 && item.level < 40) {
+			return `${APP_URL}/assets/images/lvl4ships.png`;
+		}
+		else if (item.level >= 40 && item.level < 50) {
+			return `${APP_URL}/assets/images/lvl5ships.png`;
+		}
+	}
+	else if (item?.category_id?.catName === "Pirates") {
+		if (item.level === 1) {
+			return `${APP_URL}/assets/images/lvl1pirates.png`;
+		}
+		else if (item.level === 2) {
+			return `${APP_URL}/assets/images/lvl2pirates.png`;
+		}
+		else if (item.level === 3) {
+			return `${APP_URL}/assets/images/lvl3pirates.png`;
+		}
+		else if (item.level === 4) {
+			return `${APP_URL}/assets/images/lvl4pirates.png`;
+		}
+		else if (item.level === 5) {
+			return `${APP_URL}/assets/images/lvl5pirates.png`;
+		}
+	}
+	else if (item?.category_id?.catName === "Others") {
+		return `${APP_URL}/assets/images/lvl1ships.png`;
+	}
+}
+
+const frameImg = (item) => {
+	if (item?.category_id?.catName === "Ships") {
+        if (item.level < 10) {
+            return `${APP_URL}/assets/images/Framelvl1.png`;
+        }
+        else if (item.level >= 10 && item.level < 20) {
+            return `${APP_URL}/assets/images/Framelvl2.png`;
+        }
+        else if (item.level >= 20 && item.level < 30) {
+            return `${APP_URL}/assets/images/Framelvl3.png`;
+        }
+        else if (item.level >= 30 && item.level < 40) {
+            return `${APP_URL}/assets/images/Framelvl4.png`;
+        }
+        else if (item.level >= 40 && item.level < 50) {
+            return `${APP_URL}/assets/images/Framelvl5.png`;
+        }
+    }
+    else if (item?.category_id?.catName === "Pirates") {
+        if (item.level === 1) {
+            return `${APP_URL}/assets/images/Framelvl1.png`;
+        }
+        else if (item.level === 2) {
+            return `${APP_URL}/assets/images/Framelvl2.png`;
+        }
+        else if (item.level === 3) {
+            return `${APP_URL}/assets/images/Framelvl3.png`;
+        }
+        else if (item.level === 4) {
+            return `${APP_URL}/assets/images/Framelvl4.png`;
+        }
+        else if (item.level === 5) {
+            return `${APP_URL}/assets/images/Framelvl5.png`;
+        }
+    }
+    else if (item?.category_id?.catName === "Others") {
+        return `${APP_URL}/assets/images/Framelvl1.png`;
+    }
+}
+
 const getInventoryList = async (collectionName, page) => {
     let walletAddress = getCookie("minigameWalletAddress");
     let userAuth = getCookie("userLogin");
@@ -129,17 +220,24 @@ const getInventoryList = async (collectionName, page) => {
         html += `<div class="Pirates_here common_market_tab">
                     <div class="parates_list ship_list">
                         <ul>`;
-        inventory.data.forEach(element => {
-            html += `<li style="cursor: pointer">
-                                        <div class="parates_div_main position-relative">
-                                            <div class="nft_nameidhere">
-                                                <p title="${element.name}">${element.name}</p>
-                                            </div>
-                                            <img src="${element.image_url}" alt="${element.name}" class="img-fluid level_bg">
-                                        </div>
-                                    </li>`;
-        });
-        html += `</ul>
+                inventory.data.forEach(element => {
+                    // console.log(element)
+                    let level = element?.level;
+                    let Imgframe = frameImg(element);
+                    let ImgframeLvl = levelImg(element);
+                    html += `<li style="cursor: pointer">
+                                <div class="parates_div_main position-relative" style="background-image: url('${Imgframe}');">
+                                    <div class="parates_label" style="background-image: url('${ImgframeLvl}');">
+                                        <small>LVL</small><h5>${level}</h5>
+                                    </div>
+                                    <div class="nft_nameidhere">
+                                        <p title="${element.name}">${element.name}</p>
+                                    </div>
+                                    <img src="${element.image_url}" alt="${element.name}" class="img-fluid level_bg">
+                                </div>
+                            </li>`;
+                });
+               html += `</ul>
                     </div>
                 </div>`;
         pagination = await createPaginationLinks(inventory.totalCount, page, 10, 2);
@@ -530,6 +628,12 @@ const timerIncrement = () => {
 let idleTimer = 0;
 $(document).ready(async function () {
     let userAuth = getCookie("userLogin");
+    if(USER_APP_TOKEN != "" && userAuth == null){
+        let detail = await parseJwt(USER_APP_TOKEN);
+        setCookie('userLogin', USER_APP_TOKEN, 365);
+        setCookie('userInfo', JSON.stringify({ "_id": detail._id, "email": detail.email }), 365);
+        userAuth = USER_APP_TOKEN;
+    }
     if (userAuth && userAuth !== null) {
         let walletAddress = getCookie("minigameWalletAddress");
         if (walletAddress)
@@ -755,7 +859,7 @@ const getCrystalListings = async (page, limit) => {
                                 <div class='buy_diamond'>
                                     <img src='${APP_URL}/assets/images/diamond.png' alt='${record._id}' class='img-fluid' />
                                 </div>
-                                <p class='crystals_items'>${record.crystalAmount}</p>
+                                <p class='crystals_items'>${record.crystalAmount}$</p>
                             </div>
                         </div>
                         <div class='buy_btns_twos d-flex align-items-center justify-content-center gap-2 mt-3'>
@@ -763,7 +867,7 @@ const getCrystalListings = async (page, limit) => {
                                 <div class='btn_icon me-2'>
                                     <img src='${APP_URL}/assets/images/busd_icon.png' alt='${record._id}' class='img-fluid' />
                                 </div>
-                                ${record.busdAmount}$
+                                ${record.busdAmount}
                             </button>
                             <button type='button' data-bs-toggle='modal' data-bs-target='#buyConfirmation' class='btn_blue'
                             data-p-id='${record._id}' data-p-busd='${record.busdAmount}' data-p-camt='${record.crystalAmount}'>Buy</button>
