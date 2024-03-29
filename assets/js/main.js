@@ -1,8 +1,8 @@
 let provider;
-// const API_BASE_URL = "https://api.piratepets.io/api/v1/";
-const API_BASE_URL = "https://api-dev.piratepets.io/api/v1/";
-// const LAMBDA_BASE_URL = "https://n01g0o3sug.execute-api.eu-north-1.amazonaws.com/dev/";
-const LAMBDA_BASE_URL = "https://h5hjkdsee4.execute-api.eu-north-1.amazonaws.com/test/";
+const API_BASE_URL = "https://api.piratepets.io/api/v1/";
+// const API_BASE_URL = "https://api-dev.piratepets.io/api/v1/";
+const LAMBDA_BASE_URL = "https://n01g0o3sug.execute-api.eu-north-1.amazonaws.com/dev/";
+// const LAMBDA_BASE_URL = "https://h5hjkdsee4.execute-api.eu-north-1.amazonaws.com/test/";
 const busdLiveContractAddress = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
 const busdTestNetContractAddress = "0x3681a42E747794D110a1F1Dad66D3cbac8653422";
 
@@ -233,7 +233,7 @@ const getInventoryList = async (collectionName, page) => {
                                     <div class="nft_nameidhere">
                                         <p title="${element.name}">${element.name}</p>
                                     </div>
-                                    <img src="${element.image_url}" alt="${element.name}" class="img-fluid level_bg">
+                                    <img src="${element.media.link}" alt="${element.name}" class="img-fluid level_bg">
                                 </div>
                             </li>`;
                 });
